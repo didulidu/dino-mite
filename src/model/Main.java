@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import view.StartWindow;
 
 public class Main {
 	public static Korisnik trenutni = new Korisnik();
@@ -15,12 +14,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Aplikacija ap = new Aplikacija();
-		try {
-			ap.ucitavanje();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	StartWindow ex = new StartWindow();
-        ex.setVisible(true);
+		ap.pokreni();
 	}
 }

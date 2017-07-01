@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import view.StartWindow;
+
 public class Aplikacija {
 	
 	private static Aplikacija instance = null;
@@ -16,6 +18,16 @@ public class Aplikacija {
 			instance = new Aplikacija();
 		}
 		return instance;
+	}
+	
+	void pokreni(){
+		try {
+			ucitavanje();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	StartWindow ex = new StartWindow();
+        ex.setVisible(true);
 	}
 	
 	void ucitavanje() throws IOException{
