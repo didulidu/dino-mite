@@ -83,6 +83,7 @@ public class Aplikacija {
 			}
 			ob.setLokacije(temp);
 			
+			
 			Main.sviObilasci.put(lista[0], ob);
 		}
 	}
