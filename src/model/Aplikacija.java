@@ -95,9 +95,19 @@ public class Aplikacija {
 				return;
 			}
 			String[] loks = lista[3].split(";");
+			ArrayList<Lokacija> temp = new ArrayList<Lokacija>();
 			for(String i : loks){
-				
+				for(Lokacija lok : ob.getGrad().getLokacije()){
+					if(i.compareTo(lok.getNaziv())==0){
+						temp.add(lok);
+						break;
+					}
+				}
 			}
+			ob.setLokacije(temp);
+			//izvodjenja obilazaka?
+			
+			Main.sviObilasci.add(ob);
 		}
 	}
 }
