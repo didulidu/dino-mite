@@ -9,6 +9,7 @@ public class Korisnik {
 	protected boolean registrovan;
 	protected ArrayList<Obilazak> vodic;
 	protected ArrayList<Obilazak> turista;
+	protected String mozda;
 	
 	public Korisnik(){
 		this.vodic = new ArrayList<Obilazak>();
