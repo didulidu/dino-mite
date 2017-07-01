@@ -12,7 +12,7 @@ public class Aplikacija {
 	protected Korisnik trenutni;
 	protected ArrayList<Obilazak> sviObilasci;
 	protected ArrayList<Grad> gradovi;
-	//prepravi arraylist gradovi na rijecnik/mapu gradova, ja ne znam
+	//prepravi arraylist gradovi na rijecnik/mapu gradova, ja ne znam heh :)
 	
 	
 	private static Aplikacija instance = null;
