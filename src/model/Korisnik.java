@@ -6,7 +6,7 @@ public class Korisnik {
 	protected String korisnickoIme;
 	protected String lozinka;
 	protected Osoba osoba;
-	protected boolean regitrovan;
+	protected boolean registrovan;
 	protected ArrayList<Obilazak> vodic;
 	protected ArrayList<Obilazak> turista;
 	
@@ -16,23 +16,23 @@ public class Korisnik {
 	}
 
 
-	public Korisnik(String korisnickoIme, String lozinka, Osoba osoba, boolean regitrovan, ArrayList<Obilazak> vodic,
+	public Korisnik(String korisnickoIme, String lozinka, Osoba osoba, boolean registrovan, ArrayList<Obilazak> vodic,
 			ArrayList<Obilazak> turista) {
 		super();
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.osoba = osoba;
-		this.regitrovan = regitrovan;
+		this.registrovan = registrovan;
 		this.vodic = vodic;
 		this.turista = turista;
 	}
 	
-	public Korisnik(String korisnickoIme, String lozinka, Osoba osoba, boolean regitrovan) {
+	public Korisnik(String korisnickoIme, String lozinka, Osoba osoba, boolean registrovan) {
 		super();
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.osoba = osoba;
-		this.regitrovan = regitrovan;
+		this.registrovan = registrovan;
 	}
 
 
@@ -52,12 +52,12 @@ public class Korisnik {
 		this.lozinka = lozinka;
 	}
 
-	public boolean isRegitrovan() {
-		return regitrovan;
+	public boolean isRegistrovan() {
+		return registrovan;
 	}
 
-	public void setRegitrovan(boolean regitrovan) {
-		this.regitrovan = regitrovan;
+	public void setRegitrovan(boolean registrovan) {
+		this.registrovan = registrovan;
 	}
 	
 	public Osoba getOsoba() {
