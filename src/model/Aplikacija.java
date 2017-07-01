@@ -24,7 +24,7 @@ public class Aplikacija {
 		String[] lista;
 		
 		//ucitavanje registrovanih korisnika
-		File fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"korisnici.txt");
+		File fajl = new File("src/fajlovi/korisnici.txt");
 		if(!fajl.exists()){
 			fajl.createNewFile();
 		}

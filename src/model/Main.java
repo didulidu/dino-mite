@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import view.StartWindow;
+
 public class Main {
 	public static Korisnik trenutni = new Korisnik();
 	public static HashMap<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
@@ -18,6 +20,7 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+    	StartWindow ex = new StartWindow();
+        ex.setVisible(true);
 	}
 }

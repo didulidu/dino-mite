@@ -1,29 +1,31 @@
 package view;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class StartWindow extends JFrame {
-
+// konstruktor poziva prikaz prozora
     public StartWindow() {
-
         initUI();
     }
-
+// instanciranje prozora za logovanje (jako je ruzan trenutno) - prikaz prozora
     private void logIn(){
+    	LogInWindow log = new LogInWindow();
+    }
+// instanciranje prozora za logovanje (jako je ruzan trenutno) - prikaz prozora
+    private void retister(){
     	
     }
-    
+// pocetni prozor    
     private void initUI() {
     	
     	setLayout(null);
+    	ImageIcon ikonica = new ImageIcon("ikonice/mite.png");
+		setIconImage(ikonica.getImage());
+    	
         JButton logB = new JButton("Log In");
         logB.setBounds(150-40, 250-50, 80, 25);
 
@@ -47,13 +49,7 @@ public class StartWindow extends JFrame {
         logB.addActionListener((ActionEvent event) -> {
             logIn();
         });
+        
     }
 
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(() -> {
-        	StartWindow ex = new StartWindow();
-            ex.setVisible(true);
-        });
-    }
 }
