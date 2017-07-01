@@ -10,6 +10,7 @@ public class Korisnik {
 	protected ArrayList<Obilazak> vodic;
 	protected ArrayList<Obilazak> turista;
 	protected String mozda;
+	protected int jea;
 	
 	public Korisnik(){
 		this.vodic = new ArrayList<Obilazak>();
