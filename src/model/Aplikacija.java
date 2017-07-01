@@ -57,7 +57,6 @@ public class Aplikacija {
 			g.setLokacije(temp);
 			Main.gradovi.put(lista[0], g);
 		}
-		
 		cit.close();
 		
 		//ucitavanje obilazaka
