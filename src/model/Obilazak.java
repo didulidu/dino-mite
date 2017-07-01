@@ -6,8 +6,17 @@ public class Obilazak {
 	protected String idOb;
 	protected ArrayList<Lokacija> lokacije;
 	protected ArrayList<Izvodjenje> izvodjenja;
+	protected ArrayList<Korisnik> turistiPrisutni;
 	protected Korisnik vodic;
 	protected Grad grad;
+	
+	public ArrayList<Korisnik> getTuristiPrisutni() {
+		return turistiPrisutni;
+	}
+
+	public void setTuristiPrisutni(ArrayList<Korisnik> turistiPrisutni) {
+		this.turistiPrisutni = turistiPrisutni;
+	}
 	
 	public Grad getGrad() {
 		return grad;
@@ -20,6 +29,7 @@ public class Obilazak {
 	public Obilazak(){
 		lokacije = new ArrayList<Lokacija>();
 		izvodjenja = new ArrayList<Izvodjenje>();
+		turistiPrisutni = new ArrayList<Korisnik>();
 	}
 
 	public Obilazak(String idOb, ArrayList<Lokacija> lokacije, ArrayList<Izvodjenje> izvodjenja, Korisnik vodic) {

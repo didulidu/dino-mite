@@ -1,1 +1,3 @@
-korisnickoIme|lozinka|ime|prezime|jmbg|ulica
+ikija|icmi|Ilija|Malinovic|123|heh
+vladsey|ichim|Vladimir|Antonic|456|hehe
+maery|ichr|Marina|Jerkovic|789|heheh

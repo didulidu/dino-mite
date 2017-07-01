@@ -1,1 +1,2 @@
-grad|lokacija1|lokacija2|lokacija3..
+Modrica|Ikijina Kuca|Centar|Pab
+Novi Sad|Spens|Centar|Kej

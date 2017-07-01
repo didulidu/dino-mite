@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Main {
 	public static Korisnik trenutni = new Korisnik();
@@ -17,5 +18,6 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 }

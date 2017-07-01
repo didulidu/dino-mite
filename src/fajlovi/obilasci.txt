@@ -1,1 +1,4 @@
-idOb|grad|korisnickoIme(vodica)|lokacija1;Lokacija2...
+1|Modrica|ikija|Ikijina Kuca|vladsey
+2|Modrica|ikija|Centar;Pab|vladsey;maery
+3|Novi Sad|vladsey|Kej;Centar;Spens|ikija
+4|Novi Sad|maery|Kej;Spens|ikija;vladsey
