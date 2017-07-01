@@ -1,0 +1,1 @@
+korisnickoIme|lozinka|ime|prezime|jmbg|ulica

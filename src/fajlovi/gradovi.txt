@@ -1,0 +1,1 @@
+grad|lokacija1|lokacija2|lokacija3..
