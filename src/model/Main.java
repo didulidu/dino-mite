@@ -2,12 +2,13 @@ package model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
-	public static ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>();
 	public static Korisnik trenutni = new Korisnik();
-	public static ArrayList<Obilazak> sviObilasci = new ArrayList<Obilazak>();
-	public static ArrayList<Grad> gradovi = new ArrayList<Grad>();
+	public static HashMap<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
+	public static HashMap<String, Obilazak> sviObilasci = new HashMap<String, Obilazak>();
+	public static HashMap<String, Grad> gradovi = new HashMap<String, Grad>();
 	
 	public static void main(String[] args) {
 		Aplikacija ap = new Aplikacija();
