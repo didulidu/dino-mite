@@ -8,12 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Aplikacija {
-	protected ArrayList<Korisnik> korisnici;
-	protected Korisnik trenutni;
-	protected ArrayList<Obilazak> sviObilasci;
-	protected ArrayList<Grad> gradovi;
-	//prepravi arraylist gradovi na rijecnik/mapu gradova, ja ne znam heh :)
-	
 	
 	private static Aplikacija instance = null;
 	
@@ -39,7 +33,7 @@ public class Aplikacija {
 			lista = linija.split("\\|");
 			Osoba os = new Osoba(lista[2], lista[3], lista[4], lista[5]);
 			Korisnik kor = new Korisnik(lista[0], lista[1], os, true);
-			korisnici.add(kor);
+			Main.korisnici.add(kor);
 		}
 		cit.close();
 		
@@ -61,7 +55,7 @@ public class Aplikacija {
 				temp.add(lok);
 			}
 			g.setLokacije(temp);
-			gradovi.add(g);
+			Main.gradovi.add(g);
 		}
 		
 		cit.close();
@@ -77,7 +71,7 @@ public class Aplikacija {
 			lista = linija.split("\\|");
 			Obilazak ob = new Obilazak();
 			ob.setIdOb(lista[0]);
-			for(Grad g : gradovi){
+			for(Grad g : Main.gradovi){
 				if(g.getNaziv().compareTo(lista[1])==0){
 					pronadjen = true;
 					ob.setGrad(g);
@@ -89,7 +83,7 @@ public class Aplikacija {
 				return;
 			}
 			pronadjen = false;
-			for(Korisnik kor : korisnici){
+			for(Korisnik kor : Main.korisnici){
 				if(kor.getKorisnickoIme().compareTo(lista[2])==0){
 					pronadjen = true;
 					ob.setVodic(kor);
