@@ -16,8 +16,8 @@ public class StartWindow extends JFrame {
     	LogInWindow log = new LogInWindow();
     }
 // instanciranje prozora za logovanje (jako je ruzan trenutno) - prikaz prozora
-    private void retister(){
-    	
+    private void register(){
+    	RegistrationWindow reg = new RegistrationWindow();
     }
 // pocetni prozor    
     private void initUI() {
@@ -48,6 +48,10 @@ public class StartWindow extends JFrame {
 
         logB.addActionListener((ActionEvent event) -> {
             logIn();
+        });
+        
+        regB.addActionListener((ActionEvent event)->{
+        	register();
         });
         
     }
