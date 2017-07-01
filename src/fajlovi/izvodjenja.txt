@@ -1,3 +1,4 @@
-1|11|10|z|vladsey
-1|12|5|z|maery
-2|21|10|d|vladsey;maery
+1|11|10|zakazan|vladsey
+1|12|5|zakazan|vladsey;maery
+2|21|10|zavrsen|maery
+2|22|15|utoku|ikija;maery

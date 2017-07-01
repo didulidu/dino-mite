@@ -15,5 +15,6 @@ public class Main {
 	public static void main(String[] args) {
 		Aplikacija ap = new Aplikacija();
 		ap.pokreni();
+		
 	}
 }

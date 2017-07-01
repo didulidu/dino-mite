@@ -60,6 +60,22 @@ public class Izvodjenje {
 	public void setObilazak(Obilazak obilazak) {
 		this.obilazak = obilazak;
 	}
+
+	@Override
+	public String toString() {
+		String linija;
+		linija = obilazak.getIdOb()+"|"+idIzv+"|"+brMjesta+"|"+stanje.toString()+"|";
+		boolean i=true;
+		for(Korisnik k : turisti){
+			if(i){
+				linija=linija+k.getKorisnickoIme();
+				i=false;
+				continue;
+			}
+			linija=linija+";"+k.getKorisnickoIme();
+		}
+		return linija+"\n";
+	}
 	
 	
 }

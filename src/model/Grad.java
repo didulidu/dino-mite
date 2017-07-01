@@ -26,6 +26,15 @@ public class Grad {
 	public void setLokacije(ArrayList<Lokacija> lokacije) {
 		this.lokacije = lokacije;
 	}
+
+	@Override
+	public String toString() {
+		String linija = naziv;
+		for(Lokacija l : lokacije){
+			linija=linija+"|"+l.toString();
+		}
+		return linija+"\n";
+	}
 	
 	
 }

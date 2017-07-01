@@ -71,6 +71,30 @@ public class Obilazak {
 	public void setVodic(Korisnik vodic) {
 		this.vodic = vodic;
 	}
+
+	@Override
+	public String toString() {
+		String linija;
+		linija = getIdOb()+"|"+getGrad().getNaziv()+"|"+getVodic().getKorisnickoIme();
+		boolean i = true;
+		for(Lokacija l : getLokacije()){
+			if (i){
+				linija = linija+"|"+l.getNaziv();
+				i = false;
+				continue;
+			}
+			linija = linija + ";"+l.getNaziv();
+		}
+		for(Korisnik k : getTuristiPrisutni()){
+			if(!i){
+				linija = linija + "|"+k.getKorisnickoIme();
+				i=true;
+				continue;
+			}
+			linija = linija + ";" + k.getKorisnickoIme();
+		}
+		return linija+"\n";
+	}
 	
 	
 }

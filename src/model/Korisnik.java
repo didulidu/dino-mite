@@ -33,6 +33,8 @@ public class Korisnik {
 		this.lozinka = lozinka;
 		this.osoba = osoba;
 		this.registrovan = registrovan;
+		this.vodic = new ArrayList<Obilazak>();
+		this.turista = new ArrayList<Obilazak>();
 	}
 
 
@@ -86,10 +88,15 @@ public class Korisnik {
 		return turista;
 	}
 
-
-
 	public void setTurista(ArrayList<Obilazak> turista) {
 		this.turista = turista;
 	}
 
+
+	@Override
+	public String toString() {
+		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+"\n";
+	}
+
+	
 }
