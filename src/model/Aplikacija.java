@@ -7,10 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import view.StartWindow;
+import view.TourWindow;
 
 public class Aplikacija {
+	public static Korisnik trenutni = new Korisnik();
+	public static HashMap<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
+	public static HashMap<String, Obilazak> sviObilasci = new HashMap<String, Obilazak>();
+	public static HashMap<String, Grad> gradovi = new HashMap<String, Grad>();
 	
 	private static Aplikacija instance = null;
 	
@@ -27,8 +33,10 @@ public class Aplikacija {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	StartWindow ex = new StartWindow();
-        ex.setVisible(true);
+    	//StartWindow ex = new StartWindow();
+        //ex.setVisible(true);
+        TourWindow tw = new TourWindow("Vladina kuca");
+
         
         
         
