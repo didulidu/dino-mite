@@ -38,10 +38,8 @@ public class Aplikacija {
         //TourWindow tw = new TourWindow("Vladina kuca");
 
         for(Obilazak o : sviObilasci.values()){
-        	System.out.println(o.getIdOb());
-        	for(Izvodjenje izv : o.getIzvodjenja()){
-        		System.out.println(izv.getIdIzv());
-        	}
+        	System.out.println(o.getNaziv());
+
         }
         
         

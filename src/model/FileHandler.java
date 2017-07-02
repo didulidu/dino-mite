@@ -70,9 +70,10 @@ public class FileHandler {
 			ob.setIdOb(lista[0]);
 			Integer br = Integer.parseInt(lista[1]);
 			ob.setBrMjesta(br);
-			ob.setGrad(Aplikacija.gradovi.get(lista[2]));
-			ob.setVodic(Aplikacija.korisnici.get(lista[3]));
-			String[] help = lista[4].split(";");
+			ob.setNaziv(lista[2]);
+			ob.setGrad(Aplikacija.gradovi.get(lista[3]));
+			ob.setVodic(Aplikacija.korisnici.get(lista[4]));
+			String[] help = lista[5].split(";");
 			ArrayList<Lokacija> temp = new ArrayList<Lokacija>();
 			for(String i : help){
 				for(Lokacija lok : ob.getGrad().getLokacije()){
@@ -84,7 +85,7 @@ public class FileHandler {
 			}
 			ob.setLokacije(temp);
 			
-			help = lista[5].split(";");
+			help = lista[6].split(";");
 			ArrayList<Korisnik> turisti = ob.getTuristiPrisutni();
 			for(String i : help){
 				ArrayList<Obilazak> turisticki = Aplikacija.korisnici.get(i).getTurista();
@@ -92,9 +93,9 @@ public class FileHandler {
 				Aplikacija.korisnici.get(i).setTurista(turisticki);
 				turisti.add(Aplikacija.korisnici.get(i));
 			}
-			ArrayList<Obilazak> vodic = Aplikacija.korisnici.get(lista[3]).getVodic();
+			ArrayList<Obilazak> vodic = Aplikacija.korisnici.get(lista[4]).getVodic();
 			vodic.add(ob);
-			Aplikacija.korisnici.get(lista[3]).setVodic(vodic);
+			Aplikacija.korisnici.get(lista[4]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
 			Aplikacija.sviObilasci.put(lista[0], ob);
 		}

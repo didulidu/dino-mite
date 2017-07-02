@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Obilazak {
 	protected String idOb;
+	protected String naziv;
 	protected ArrayList<Lokacija> lokacije;
 	protected ArrayList<Izvodjenje> izvodjenja;
 	protected ArrayList<Korisnik> turistiPrisutni;
@@ -13,6 +14,14 @@ public class Obilazak {
 	
 	public int getBrMjesta() {
 		return brMjesta;
+	}
+
+	public String getNaziv() {
+		return naziv;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
 	}
 
 	public void setBrMjesta(int brMjesta) {

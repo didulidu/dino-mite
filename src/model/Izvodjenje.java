@@ -93,5 +93,25 @@ public class Izvodjenje {
 		return linija+"|"+sdf.format(termin)+"\n";
 	}
 	
+	public void otkazivanjeObilaska(){
+		
+	}
+	
+	public void prijavaDolaska(){
+		this.brMjesta--;
+		if(this.brMjesta==0){
+			Popunjen p = new Popunjen();
+		}
+		
+	}
+	
+	public void odjavaDolaska(){
+		
+	}
+	
+	public void promijeniStanje(){
+		
+	}
+	
 	
 }
