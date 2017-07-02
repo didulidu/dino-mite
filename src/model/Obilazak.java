@@ -9,7 +9,16 @@ public class Obilazak {
 	protected ArrayList<Korisnik> turistiPrisutni;
 	protected Korisnik vodic;
 	protected Grad grad;
+	protected int brMjesta;
 	
+	public int getBrMjesta() {
+		return brMjesta;
+	}
+
+	public void setBrMjesta(int brMjesta) {
+		this.brMjesta = brMjesta;
+	}
+
 	public ArrayList<Korisnik> getTuristiPrisutni() {
 		return turistiPrisutni;
 	}
