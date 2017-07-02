@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import model.Aplikacija;
 import model.Korisnik;
 import model.Main;
 
@@ -24,7 +25,7 @@ public class LogInWindow extends JFrame{
 	}
 	
 	private Korisnik checkLogIn(){
-		for (Korisnik k: Main.korisnici.values()){
+		for (Korisnik k: Aplikacija.korisnici.values()){
 			if  (k.getKorisnickoIme().compareTo(username) == 0 && k.getLozinka().compareTo(password) == 0)
 				return k;
 		}
