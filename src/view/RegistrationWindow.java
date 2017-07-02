@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import model.Aplikacija;
 import model.Korisnik;
 import model.Main;
 import model.Osoba;
@@ -29,11 +30,11 @@ public class RegistrationWindow extends JFrame{
 	}
 	
 	private Korisnik checkRegistration(){
-		for (Korisnik k: Main.korisnici.values()){
+		for (Korisnik k: Aplikacija.korisnici.values()){
 			if  (k.getKorisnickoIme().compareTo(_username) == 0)
 				return null;
 		}
-		Main.korisnici.put(_username, new Korisnik(_username,_password,new Osoba(_name, _lName, _jmbg, _street),true));
+		Aplikacija.korisnici.put(_username, new Korisnik(_username,_password,new Osoba(_name, _lName, _jmbg, _street),true));
 		
 		return new Korisnik();
 	}
