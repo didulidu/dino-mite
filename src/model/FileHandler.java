@@ -68,9 +68,11 @@ public class FileHandler {
 			lista = linija.split("\\|");
 			Obilazak ob = new Obilazak();
 			ob.setIdOb(lista[0]);
-			ob.setGrad(Aplikacija.gradovi.get(lista[1]));
-			ob.setVodic(Aplikacija.korisnici.get(lista[2]));
-			String[] help = lista[3].split(";");
+			Integer br = Integer.parseInt(lista[1]);
+			ob.setBrMjesta(br);
+			ob.setGrad(Aplikacija.gradovi.get(lista[2]));
+			ob.setVodic(Aplikacija.korisnici.get(lista[3]));
+			String[] help = lista[4].split(";");
 			ArrayList<Lokacija> temp = new ArrayList<Lokacija>();
 			for(String i : help){
 				for(Lokacija lok : ob.getGrad().getLokacije()){
@@ -82,7 +84,7 @@ public class FileHandler {
 			}
 			ob.setLokacije(temp);
 			
-			help = lista[4].split(";");
+			help = lista[5].split(";");
 			ArrayList<Korisnik> turisti = ob.getTuristiPrisutni();
 			for(String i : help){
 				ArrayList<Obilazak> turisticki = Aplikacija.korisnici.get(i).getTurista();
@@ -90,9 +92,9 @@ public class FileHandler {
 				Aplikacija.korisnici.get(i).setTurista(turisticki);
 				turisti.add(Aplikacija.korisnici.get(i));
 			}
-			ArrayList<Obilazak> vodic = Aplikacija.korisnici.get(lista[2]).getVodic();
+			ArrayList<Obilazak> vodic = Aplikacija.korisnici.get(lista[3]).getVodic();
 			vodic.add(ob);
-			Aplikacija.korisnici.get(lista[2]).setVodic(vodic);
+			Aplikacija.korisnici.get(lista[3]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
 			Aplikacija.sviObilasci.put(lista[0], ob);
 		}
@@ -103,36 +105,33 @@ public class FileHandler {
 		while((linija=cit.readLine())!=null){
 			lista = linija.split("\\|");
 			Izvodjenje izv = new Izvodjenje();
-			System.out.println(lista[0]);
 			ArrayList<Izvodjenje> temp = Aplikacija.sviObilasci.get(lista[0]).getIzvodjenja();
 			izv.setObilazak(Aplikacija.sviObilasci.get(lista[0]));
-			
 			izv.setIdIzv(lista[1]);
-			Integer br = Integer.parseInt(lista[2]);
-			izv.setBrMjesta(br);
-			if(lista[3].compareTo("kreiran")==0){
+			izv.setBrMjesta(izv.getObilazak().getBrMjesta());
+			if(lista[2].compareTo("kreiran")==0){
 				Kreiran s = new Kreiran();
 				izv.setStanje(s);
-			}else if(lista[3].compareTo("utoku")==0){
+			}else if(lista[2].compareTo("utoku")==0){
 				UToku s = new UToku();
 				izv.setStanje(s);
-			}else if(lista[3].compareTo("zavrsen")==0){
+			}else if(lista[2].compareTo("zavrsen")==0){
 				Zavrsen s = new Zavrsen();
 				izv.setStanje(s);
-			}else if(lista[3].compareTo("otkazan")==0){
+			}else if(lista[2].compareTo("otkazan")==0){
 				Otkazan s = new Otkazan();
 				izv.setStanje(s);
-			}else if(lista[3].compareTo("popunjen")==0){
+			}else if(lista[2].compareTo("popunjen")==0){
 				Popunjen s = new Popunjen();
 				izv.setStanje(s);
 			}
-			String[] help = lista[4].split(";");
+			String[] help = lista[3].split(";");
 			HashMap<Korisnik, String> turisti = izv.getTuristi();
 			for(String i : help){
 				String[] prijavljeniTurista = i.split("/");
 				turisti.put(Aplikacija.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
 			}
-			izv.setTermin(termin.parse(lista[5]));
+			izv.setTermin(termin.parse(lista[4]));
 			izv.setTuristi(turisti);
 			temp.add(izv);
 			Aplikacija.sviObilasci.get(lista[0]).setIzvodjenja(temp);
