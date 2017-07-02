@@ -137,8 +137,19 @@ public class FileHandler {
 			temp.add(izv);
 			Aplikacija.sviObilasci.get(lista[0]).setIzvodjenja(temp);
 		}
+		cit.close();
 		
 		//ucitavanje komentara
+		fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"komentari.txt");
+		cit = new BufferedReader(new FileReader(fajl.getCanonicalPath()));
+		while((linija=cit.readLine())!=null){
+			lista = linija.split("\\|");
+			if (!Aplikacija.sviObilasci.get(lista[0]).getKomentari().containsKey(lista[1])){
+				Aplikacija.sviObilasci.get(lista[0]).getKomentari().put(lista[1], new ArrayList<String>());
+			}
+			Aplikacija.sviObilasci.get(lista[0]).getKomentari().get(lista[1]).add(lista[2]);
+		}
+		cit.close();
 	}
 	
 	public static void upisUFajl() throws IOException{
@@ -167,5 +178,15 @@ public class FileHandler {
 		}
 		pis.close();
 		pis2.close();
+		
+		fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"komentari.txt");
+		pis = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
+		for (Obilazak o:Aplikacija.sviObilasci.values()){
+			for (String user:o.getKomentari().keySet()){
+				for (String kom:o.getKomentari().get(user)){
+					pis.write(o.getIdOb()+"|"+user+"|"+kom+"\n");
+				}
+			}
+		}
 	}
 }
