@@ -23,7 +23,7 @@ public class StartWindow extends JFrame {
     private void initUI() {
     	
     	setLayout(null);
-    	ImageIcon ikonica = new ImageIcon("ikonice/mite.png");
+    	ImageIcon ikonica = new ImageIcon("./src/slike/mite.png");
 		setIconImage(ikonica.getImage());
     	
         JButton logB = new JButton("Log In");
