@@ -32,7 +32,7 @@ public class FileHandler {
 			lista = linija.split("\\|");
 			Osoba os = new Osoba(lista[2], lista[3], lista[4], lista[5],datRodj.parse(lista[6]),lista[7],Double.parseDouble(lista[8]),lista[9]);
 			Korisnik kor = new Korisnik(lista[0], lista[1], os, true);
-			Main.korisnici.put(lista[0], kor);
+			Aplikacija.korisnici.put(lista[0], kor);
 		}
 		cit.close();
 		
@@ -54,7 +54,7 @@ public class FileHandler {
 				temp.add(lok);
 			}
 			g.setLokacije(temp);
-			Main.gradovi.put(lista[0], g);
+			Aplikacija.gradovi.put(lista[0], g);
 		}
 		cit.close();
 		
@@ -68,8 +68,8 @@ public class FileHandler {
 			lista = linija.split("\\|");
 			Obilazak ob = new Obilazak();
 			ob.setIdOb(lista[0]);
-			ob.setGrad(Main.gradovi.get(lista[1]));
-			ob.setVodic(Main.korisnici.get(lista[2]));
+			ob.setGrad(Aplikacija.gradovi.get(lista[1]));
+			ob.setVodic(Aplikacija.korisnici.get(lista[2]));
 			String[] help = lista[3].split(";");
 			ArrayList<Lokacija> temp = new ArrayList<Lokacija>();
 			for(String i : help){
@@ -85,16 +85,16 @@ public class FileHandler {
 			help = lista[4].split(";");
 			ArrayList<Korisnik> turisti = ob.getTuristiPrisutni();
 			for(String i : help){
-				ArrayList<Obilazak> turisticki = Main.korisnici.get(i).getTurista();
+				ArrayList<Obilazak> turisticki = Aplikacija.korisnici.get(i).getTurista();
 				turisticki.add(ob);
-				Main.korisnici.get(i).setTurista(turisticki);
-				turisti.add(Main.korisnici.get(i));
+				Aplikacija.korisnici.get(i).setTurista(turisticki);
+				turisti.add(Aplikacija.korisnici.get(i));
 			}
-			ArrayList<Obilazak> vodic = Main.korisnici.get(lista[2]).getVodic();
+			ArrayList<Obilazak> vodic = Aplikacija.korisnici.get(lista[2]).getVodic();
 			vodic.add(ob);
-			Main.korisnici.get(lista[2]).setVodic(vodic);
+			Aplikacija.korisnici.get(lista[2]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
-			Main.sviObilasci.put(lista[0], ob);
+			Aplikacija.sviObilasci.put(lista[0], ob);
 		}
 		cit.close();
 		
@@ -104,8 +104,8 @@ public class FileHandler {
 			lista = linija.split("\\|");
 			Izvodjenje izv = new Izvodjenje();
 			System.out.println(lista[0]);
-			ArrayList<Izvodjenje> temp = Main.sviObilasci.get(lista[0]).getIzvodjenja();
-			izv.setObilazak(Main.sviObilasci.get(lista[0]));
+			ArrayList<Izvodjenje> temp = Aplikacija.sviObilasci.get(lista[0]).getIzvodjenja();
+			izv.setObilazak(Aplikacija.sviObilasci.get(lista[0]));
 			
 			izv.setIdIzv(lista[1]);
 			Integer br = Integer.parseInt(lista[2]);
@@ -127,26 +127,28 @@ public class FileHandler {
 			HashMap<Korisnik, String> turisti = izv.getTuristi();
 			for(String i : help){
 				String[] prijavljeniTurista = i.split("/");
-				turisti.put(Main.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
+				turisti.put(Aplikacija.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
 			}
 			izv.setTermin(termin.parse(lista[5]));
 			izv.setTuristi(turisti);
 			temp.add(izv);
-			Main.sviObilasci.get(lista[0]).setIzvodjenja(temp);
+			Aplikacija.sviObilasci.get(lista[0]).setIzvodjenja(temp);
 		}
+		
+		//ucitavanje komentara
 	}
 	
 	public static void upisUFajl() throws IOException{
 		File fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"korisnici.txt");
 		PrintWriter pis = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
 		String linija;
-		for(Korisnik k : Main.korisnici.values()){
+		for(Korisnik k : Aplikacija.korisnici.values()){
 			pis.write(k.toString());
 		}
 		pis.close();
 		fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"gradovi.txt");
 		pis = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
-		for(Grad g : Main.gradovi.values()){
+		for(Grad g : Aplikacija.gradovi.values()){
 			pis.write(g.toString());
 		}
 		pis.close();
@@ -154,7 +156,7 @@ public class FileHandler {
 		pis = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
 		fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"izvodjenja.txt");
 		PrintWriter pis2 = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
-		for(Obilazak o : Main.sviObilasci.values()){
+		for(Obilazak o : Aplikacija.sviObilasci.values()){
 			pis.write(o.toString());
 			for(Izvodjenje izv : o.getIzvodjenja()){
 				pis2.write(izv.toString());
