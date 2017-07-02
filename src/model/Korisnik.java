@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Korisnik {
@@ -95,7 +96,8 @@ public class Korisnik {
 
 	@Override
 	public String toString() {
-		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+osoba.getDatumRodjenja()+"|"+osoba.getBrojRacuna()+"|"+osoba.getStanjeNaRacunu()+"|"+osoba.getEmail()+"\n";
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY.");
+		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+"|"+sdf.format(osoba.getDatumRodjenja())+"|"+osoba.getBrojRacuna()+"|"+osoba.getStanjeNaRacunu()+"|"+osoba.getEmail()+"\n";
 	}
 
 	

@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -77,18 +78,19 @@ public class Izvodjenje {
 
 	@Override
 	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 		String linija;
 		linija = obilazak.getIdOb()+"|"+idIzv+"|"+brMjesta+"|"+stanje.toString()+"|";
 		boolean i=true;
 		for(Korisnik k : turisti.keySet()){
 			if(i){
-				linija=linija+k.getKorisnickoIme();
+				linija=linija+k.getKorisnickoIme()+"/"+turisti.get(k);
 				i=false;
 				continue;
 			}
-			linija=linija+";"+k.getKorisnickoIme();
+			linija=linija+";"+k.getKorisnickoIme()+"/"+turisti.get(k);
 		}
-		return linija+"\n";
+		return linija+"|"+sdf.format(termin)+"\n";
 	}
 	
 	
