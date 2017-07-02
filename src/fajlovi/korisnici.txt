@@ -1,3 +1,3 @@
-maery|pass1|Marina|Jerkovic|789|ulica1|26.05.1996.|001|20000|marina@gmail.com
-ikija|pass2|Ilija|Malinovic|123|ulica2|05.01.1997.|002|20000|ikija@gmail.com
-vladsey|pass3|Vladimir|Antonic|456|ulica3|20.05.1996.|003|vlada@gmail.com
+maery|pass1|Marina|Jerkovic|789|ulica1Mon Jan 01 00:00:00 CET 1996|001|20000.0|marina@gmail.com
+ikija|pass2|Ilija|Malinovic|123|ulica2Mon Dec 30 00:00:00 CET 1996|002|20000.0|ikija@gmail.com
+vladsey|pass3|Vladimir|Antonic|456|ulica3Mon Jan 01 00:00:00 CET 1996|003|20000.0|vlada@gmail.com

@@ -1,17 +1,39 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Osoba {
 	protected String ime;
 	protected String prezime;
 	protected String jmbg;
 	protected String ulica;
+	protected Date datumRodjenja;
+	protected String brojRacuna;
+	protected double stanjeNaRacunu;
+	protected String email;
 	
 	public Osoba(){
 		
 	}
 	
+	
+	
+	public Osoba(String ime, String prezime, String jmbg, String ulica, Date datumRodjenja, String brojRacuna,
+			double stanjeNaRacunu, String email) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.jmbg = jmbg;
+		this.ulica = ulica;
+		this.datumRodjenja = datumRodjenja;
+		this.brojRacuna = brojRacuna;
+		this.stanjeNaRacunu = stanjeNaRacunu;
+		this.email = email;
+	}
+
+
+
 	public Osoba(String ime, String prezime, String jmbg, String ulica) {
 		super();
 		this.ime = ime;
@@ -51,6 +73,56 @@ public class Osoba {
 	public void setUlica(String ulica) {
 		this.ulica = ulica;
 	}
+
+
+
+	public Date getDatumRodjenja() {
+		return datumRodjenja;
+	}
+
+
+
+	public void setDatumRodjenja(Date datumRodjenja) {
+		this.datumRodjenja = datumRodjenja;
+	}
+
+
+
+	public String getBrojRacuna() {
+		return brojRacuna;
+	}
+
+
+
+	public void setBrojRacuna(String brojRacuna) {
+		this.brojRacuna = brojRacuna;
+	}
+
+
+
+	public double getStanjeNaRacunu() {
+		return stanjeNaRacunu;
+	}
+
+
+
+	public void setStanjeNaRacunu(double stanjeNaRacunu) {
+		this.stanjeNaRacunu = stanjeNaRacunu;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 	
 	

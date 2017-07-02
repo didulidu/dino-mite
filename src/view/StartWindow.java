@@ -1,5 +1,7 @@
 package view;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
 import javax.swing.ImageIcon;
@@ -23,6 +25,10 @@ public class StartWindow extends JFrame {
     private void initUI() {
     	
     	setLayout(null);
+    	
+    	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    	
+    	
     	ImageIcon ikonica = new ImageIcon("./src/slike/mite.png");
 		setIconImage(ikonica.getImage());
     	
@@ -41,10 +47,11 @@ public class StartWindow extends JFrame {
         add(galB);
 
         setTitle("DinoMite");
-        setSize(500,500);
+        setSize(dim.width*4/5,dim.height*4/5);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
 
         logB.addActionListener((ActionEvent event) -> {
             logIn();

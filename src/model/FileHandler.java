@@ -6,14 +6,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class FileHandler {
 	protected static String sep = System.getProperty("file.separator");
 	
-	public static void ucitavanje() throws IOException{
+	public static void ucitavanje() throws IOException, NumberFormatException, ParseException{
 		String linija;
 		String[] lista;
+		
+		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.YYYY.");
+		SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
 		
 		//ucitavanje registrovanih korisnika
 		File fajl = new File("src/fajlovi/korisnici.txt");
@@ -23,7 +30,7 @@ public class FileHandler {
 		BufferedReader cit = new BufferedReader(new FileReader(fajl.getAbsolutePath()));
 		while((linija=cit.readLine())!=null){
 			lista = linija.split("\\|");
-			Osoba os = new Osoba(lista[2], lista[3], lista[4], lista[5]);
+			Osoba os = new Osoba(lista[2], lista[3], lista[4], lista[5],datRodj.parse(lista[6]),lista[7],Double.parseDouble(lista[8]),lista[9]);
 			Korisnik kor = new Korisnik(lista[0], lista[1], os, true);
 			Main.korisnici.put(lista[0], kor);
 		}
@@ -117,10 +124,12 @@ public class FileHandler {
 				izv.setStanje(s);
 			}
 			String[] help = lista[4].split(";");
-			ArrayList<Korisnik> turisti = izv.getTuristi();
+			HashMap<Korisnik, String> turisti = izv.getTuristi();
 			for(String i : help){
-				turisti.add(Main.korisnici.get(i));
+				String[] prijavljeniTurista = i.split("/");
+				turisti.put(Main.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
 			}
+			izv.setTermin(termin.parse(lista[5]));
 			izv.setTuristi(turisti);
 			temp.add(izv);
 			Main.sviObilasci.get(lista[0]).setIzvodjenja(temp);

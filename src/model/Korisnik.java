@@ -95,7 +95,7 @@ public class Korisnik {
 
 	@Override
 	public String toString() {
-		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+"\n";
+		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+osoba.getDatumRodjenja()+"|"+osoba.getBrojRacuna()+"|"+osoba.getStanjeNaRacunu()+"|"+osoba.getEmail()+"\n";
 	}
 
 	

@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
@@ -32,6 +33,7 @@ public class LogInWindow extends JFrame{
 	
 	private void initUI(){
 		setLayout(null);
+		
 		JButton ok = new JButton("Ok");
 		ok.setBounds(200-40, 300-50 , 80, 25);
 		JButton cancel = new JButton("Cancel");
@@ -50,7 +52,7 @@ public class LogInWindow extends JFrame{
 		JLabel errT= new JLabel("<html><font color='red'>Error: Incorrect username and/or passwort.Please try again! </font></html>");
 		errT.setBounds(150,300, 150,60);
 		errT.setVisible(false);
-		setSize(new Dimension(400,400));
+		setSize(new Dimension(400,300));
 		setResizable(false);
 		add(cancel);
 		add(ok);
@@ -59,9 +61,10 @@ public class LogInWindow extends JFrame{
 		add(userT);
 		add(passT);
 		add(errT);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		setTitle("Log in to DinoMite!");
-		ImageIcon ikonica = new ImageIcon("ikonice/mite.png");
+		ImageIcon ikonica = new ImageIcon("./src/slike/mite.png");
 		setIconImage(ikonica.getImage());
 		
 		// na klik cancel dugmeta :
@@ -84,7 +87,7 @@ public class LogInWindow extends JFrame{
 				dispose();
 			}
 		});
-		
+	
 		
 	}
 	

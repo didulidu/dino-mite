@@ -1,13 +1,16 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Izvodjenje {
 	protected String idIzv;
 	protected int brMjesta;
 	protected Obilazak obilazak;
-	protected ArrayList<Korisnik> turisti;
+	protected HashMap<Korisnik, String> turisti = new HashMap<Korisnik, String>();
 	protected Stanje stanje;
+	protected Date termin;
 	
 	public Stanje getStanje() {
 		return stanje;
@@ -18,10 +21,10 @@ public class Izvodjenje {
 	}
 
 	public Izvodjenje(){
-		turisti = new ArrayList<Korisnik>();
+		turisti = new HashMap<Korisnik, String>();
 	}
 	
-	public Izvodjenje(String idIzv, int brMjesta, Obilazak obilazak, ArrayList<Korisnik> turisti) {
+	public Izvodjenje(String idIzv, int brMjesta, Obilazak obilazak, HashMap<Korisnik, String> turisti) {
 		super();
 		this.idIzv = idIzv;
 		this.brMjesta = brMjesta;
@@ -37,11 +40,11 @@ public class Izvodjenje {
 		this.idIzv = idIzv;
 	}
 
-	public ArrayList<Korisnik> getTuristi() {
+	public HashMap<Korisnik, String> getTuristi() {
 		return turisti;
 	}
 
-	public void setTuristi(ArrayList<Korisnik> turisti) {
+	public void setTuristi(HashMap<Korisnik, String> turisti) {
 		this.turisti = turisti;
 	}
 
@@ -60,13 +63,24 @@ public class Izvodjenje {
 	public void setObilazak(Obilazak obilazak) {
 		this.obilazak = obilazak;
 	}
+	
+	
+	
+
+	public Date getTermin() {
+		return termin;
+	}
+
+	public void setTermin(Date termin) {
+		this.termin = termin;
+	}
 
 	@Override
 	public String toString() {
 		String linija;
 		linija = obilazak.getIdOb()+"|"+idIzv+"|"+brMjesta+"|"+stanje.toString()+"|";
 		boolean i=true;
-		for(Korisnik k : turisti){
+		for(Korisnik k : turisti.keySet()){
 			if(i){
 				linija=linija+k.getKorisnickoIme();
 				i=false;
