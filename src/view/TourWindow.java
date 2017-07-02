@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import model.Aplikacija;
@@ -39,7 +40,18 @@ public class TourWindow extends JFrame {
 			}
 		}
 		
-		JScrollPane panelKomentara = new JScrollPane();
+		JPanel panel = new JPanel();
+		JScrollPane panelKomentara = new JScrollPane(panel);
+		
+		panelKomentara.setBounds(this.getSize().width/15,this.getSize().height/4 , 700, 400);
+		panelKomentara.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		this.add(panelKomentara);
+		
+
+        //this.pack();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        for (Korisnik k:)
 		
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
