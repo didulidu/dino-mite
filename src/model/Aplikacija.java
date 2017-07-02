@@ -18,6 +18,7 @@ public class Aplikacija {
 	public static HashMap<String, Obilazak> sviObilasci = new HashMap<String, Obilazak>();
 	public static HashMap<String, Grad> gradovi = new HashMap<String, Grad>();
 	
+	
 	private static Aplikacija instance = null;
 	
 	public static Aplikacija getInstance(){
