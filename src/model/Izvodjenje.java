@@ -98,11 +98,10 @@ public class Izvodjenje {
 	}
 	
 	public void prijavaDolaska(){
-		this.brMjesta--;
-		if(this.brMjesta==0){
-			Popunjen p = new Popunjen();
+		if(this.brMjesta>0){
+			this.brMjesta--;
+			this.stanje.prijavaNaTermin();
 		}
-		
 	}
 	
 	public void odjavaDolaska(){

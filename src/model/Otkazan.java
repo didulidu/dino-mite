@@ -12,14 +12,33 @@ public class Otkazan extends Stanje {
 	}
 
 	@Override
-	public void placanje() {
+	public void otkazanTermin() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void povracajNovca() {
+	public void prijavaNaTermin() {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void odjavaOdTermina() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void poceoObilazak() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void zavrsenObilazak() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
