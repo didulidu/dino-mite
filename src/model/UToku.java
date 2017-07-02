@@ -10,4 +10,14 @@ public class UToku extends Stanje {
 	public String toString() {
 		return upis;
 	}
+
+	@Override
+	public void placanje() {
+		
+	}
+
+	@Override
+	public void povracajNovca() {
+		
+	}
 }

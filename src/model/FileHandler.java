@@ -110,8 +110,8 @@ public class FileHandler {
 			izv.setIdIzv(lista[1]);
 			Integer br = Integer.parseInt(lista[2]);
 			izv.setBrMjesta(br);
-			if(lista[3].compareTo("zakazan")==0){
-				Zakazan s = new Zakazan();
+			if(lista[3].compareTo("kreiran")==0){
+				Kreiran s = new Kreiran();
 				izv.setStanje(s);
 			}else if(lista[3].compareTo("utoku")==0){
 				UToku s = new UToku();
@@ -121,6 +121,9 @@ public class FileHandler {
 				izv.setStanje(s);
 			}else if(lista[3].compareTo("otkazan")==0){
 				Otkazan s = new Otkazan();
+				izv.setStanje(s);
+			}else if(lista[3].compareTo("popunjen")==0){
+				Popunjen s = new Popunjen();
 				izv.setStanje(s);
 			}
 			String[] help = lista[4].split(";");

@@ -1,14 +1,9 @@
 package model;
 
-public class Otkazan extends Stanje {
-	
-	public Otkazan(){
-		upis = "otkazan";
-	}
-	
-	@Override
-	public String toString() {
-		return upis;
+public class Popunjen extends Stanje{
+
+	public Popunjen(){
+		upis = "popunjen";
 	}
 
 	@Override
@@ -22,4 +17,11 @@ public class Otkazan extends Stanje {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String toString() {
+		return upis;
+	}
+	
+	
 }
