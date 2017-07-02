@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Obilazak {
 	protected String idOb;
@@ -11,7 +12,18 @@ public class Obilazak {
 	protected Korisnik vodic;
 	protected Grad grad;
 	protected int brMjesta;
+	protected HashMap<String, ArrayList<String>> komentari = new HashMap<String, ArrayList<String>>(); //kljuc: username, vrednost: lista komentara
 	
+	
+	
+	public HashMap<String, ArrayList<String>> getKomentari() {
+		return komentari;
+	}
+
+	public void setKomentari(HashMap<String, ArrayList<String>> komentari) {
+		this.komentari = komentari;
+	}
+
 	public int getBrMjesta() {
 		return brMjesta;
 	}
