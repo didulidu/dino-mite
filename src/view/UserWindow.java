@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -46,6 +49,7 @@ public class UserWindow extends JFrame{
 	
 	private void ucitavanjePodataka(Korisnik k){
 		ime = new JLabel("Ime: 	" + k.getOsoba().getIme());
+		this.setTitle("User profile: " + k.getKorisnickoIme());
 		prezime = new JLabel("Prezime:	" + k.getOsoba().getPrezime());
 		email = new JLabel("Email:	" + k.getOsoba().getEmail());
 		jmbg = new JLabel("Jmbg: " + k.getOsoba().getJmbg());
@@ -54,8 +58,9 @@ public class UserWindow extends JFrame{
 		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.YYYY.");
 		datumRodj = new JLabel("Datum rodjenja:	 " + datRodj.format(k.getOsoba().getDatumRodjenja()));
 		stanje = new JLabel("Stanje racuna: 	" + k.getOsoba().getStanjeNaRacunu());
-		ImageIcon ii= new ImageIcon("./src/slike/dinamit.png");
+		ImageIcon ii= new ImageIcon("./src/slike/naslov.png");
 		ii.getImage().getScaledInstance(100, 100, Image.SCALE_REPLICATE);
+		this.setIconImage(ii.getImage());
 		slika = new JLabel(ii);
 	}
 	
@@ -119,6 +124,25 @@ public class UserWindow extends JFrame{
 		obilasciKaoTurista.setBounds(40, 160, 250, 250);
 		obilasciKaoTurista.getViewport().setBackground(new Color(153,204,255));
 		add(obilasciKaoTurista);
+		tabela.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable target = (JTable)e.getSource();
+			      int row = target.getSelectedRow();
+			      int column = target.getSelectedColumn();
+			      String naz = (String)tabela.getModel().getValueAt(row, column);
+			      String id="";
+			      for(Obilazak o : Aplikacija.sviObilasci.values()){
+			    	  if(o.getNaziv().compareTo(naz)==0){
+			    		  id = o.getIdOb();
+			    		  break;
+			    	  }
+			      }
+			      TourWindow tw = new TourWindow(id);
+			      tw.setVisible(true);
+			    }
+			  }
+			});
 		
 		//dodavanje obilazaka koje je korisnik kreirao kao vodic
 		
@@ -153,14 +177,11 @@ public class UserWindow extends JFrame{
 		tabelaIzvodjenja.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
 		tabelaIzvodjenja.setRowHeight(50);
 		tabelaIzvodjenja.setBackground(new Color(255,102,102));
-		Dimension size = new Dimension(1000, 450);
-		tabelaIzvodjenja.setPreferredSize(size);
-	
 		izvodjenja = new JScrollPane(tabelaIzvodjenja);
 		izvodjenja.setBounds(450, 250, 250, 450);
 		izvodjenja.getViewport().setBackground(new Color(153,204,255));
-		izvodjenja.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		izvodjenja.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//izvodjenja.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		//izvodjenja.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		add(izvodjenja);
 		tabelaIzvodjenja.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
