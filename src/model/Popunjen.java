@@ -42,4 +42,5 @@ public class Popunjen extends Stanje{
 	public void zavrsenoIzvodjenje() {
 		
 	}
+
 }

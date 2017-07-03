@@ -32,7 +32,13 @@ public class Osoba {
 		this.email = email;
 	}
 
-
+	public Osoba(String ime, String prezime, Date datumRodjenja, String email, double Stanje){
+		this.ime =ime;
+		this.prezime=prezime;
+		this.email = email;
+		this.datumRodjenja=datumRodjenja;
+		this.stanjeNaRacunu=Stanje;
+	}
 
 	public Osoba(String ime, String prezime, String jmbg, String ulica) {
 		super();

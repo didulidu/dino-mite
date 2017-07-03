@@ -43,6 +43,7 @@ public class Kreiran extends Stanje{
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 	
 

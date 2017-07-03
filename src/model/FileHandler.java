@@ -105,38 +105,39 @@ public class FileHandler {
 		cit = new BufferedReader(new FileReader(fajl.getCanonicalPath()));
 		while((linija=cit.readLine())!=null){
 			lista = linija.split("\\|");
+			String[] help = lista[0].split("\\.");
 			Izvodjenje izv = new Izvodjenje();
-			ArrayList<Izvodjenje> temp = Aplikacija.sviObilasci.get(lista[0]).getIzvodjenja();
-			izv.setObilazak(Aplikacija.sviObilasci.get(lista[0]));
-			izv.setIdIzv(lista[1]);
+			ArrayList<Izvodjenje> temp = Aplikacija.sviObilasci.get(help[0]).getIzvodjenja();
+			izv.setObilazak(Aplikacija.sviObilasci.get(help[0]));
+			izv.setIdIzv(help[1]);
 			izv.setBrMjesta(izv.getObilazak().getBrMjesta());
-			if(lista[2].compareTo("kreiran")==0){
+			if(lista[1].compareTo("kreiran")==0){
 				Kreiran s = new Kreiran();
 				izv.setStanje(s);
-			}else if(lista[2].compareTo("utoku")==0){
+			}else if(lista[1].compareTo("utoku")==0){
 				UToku s = new UToku();
 				izv.setStanje(s);
-			}else if(lista[2].compareTo("zavrsen")==0){
+			}else if(lista[1].compareTo("zavrsen")==0){
 				Zavrsen s = new Zavrsen();
 				izv.setStanje(s);
-			}else if(lista[2].compareTo("otkazan")==0){
+			}else if(lista[1].compareTo("otkazan")==0){
 				Otkazan s = new Otkazan();
 				izv.setStanje(s);
-			}else if(lista[2].compareTo("popunjen")==0){
+			}else if(lista[1].compareTo("popunjen")==0){
 				Popunjen s = new Popunjen();
 				izv.setStanje(s);
 			}
 			izv.getStanje().setIzvodjenje(izv);
-			String[] help = lista[3].split(";");
+			String[] h = lista[2].split(";");
 			HashMap<Korisnik, String> turisti = izv.getTuristi();
-			for(String i : help){
+			for(String i : h){
 				String[] prijavljeniTurista = i.split("/");
 				turisti.put(Aplikacija.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
 			}
-			izv.setTermin(termin.parse(lista[4]));
+			izv.setTermin(termin.parse(lista[3]));
 			izv.setTuristi(turisti);
 			temp.add(izv);
-			Aplikacija.sviObilasci.get(lista[0]).setIzvodjenja(temp);
+			Aplikacija.sviObilasci.get(help[0]).setIzvodjenja(temp);
 		}
 		cit.close();
 		
