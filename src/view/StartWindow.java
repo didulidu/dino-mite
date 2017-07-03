@@ -82,7 +82,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		display.setFont(new Font("fontic", Font.BOLD, 20));
 		box.setBounds(100, 200, 100, 25);
 		add(display);
-		add(box);
+		add(box);   
 		box.addItemListener(this);
 		setTitle("DinoMite");
 		ImageIcon image = new ImageIcon("./src/slike/dinamit.png");

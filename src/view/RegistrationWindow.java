@@ -25,7 +25,7 @@ public class RegistrationWindow extends JFrame{
 	private String _street;
 	private String _name;
 	private String _lName;
-	
+	   
 	
 	public RegistrationWindow() {
 		initUI();
