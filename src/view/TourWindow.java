@@ -127,6 +127,7 @@ public class TourWindow extends JFrame{
 		
 		
 		dugmeRezervisi.addActionListener((ActionEvent event) -> {
+			//dd
 			//ReservationWindow();//prosledjuju se termin, username korisnika
 		});
 		
