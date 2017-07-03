@@ -32,6 +32,7 @@ public class RegistrationWindow extends JFrame{
 	}
 	
 	private Korisnik checkRegistration(){
+		if (_username.isEmpty() || _password.isEmpty() || _name.isEmpty() || _lName.isEmpty() || _street.isEmpty() || _jmbg.isEmpty()  ) return null;
 		for (Korisnik k: Aplikacija.korisnici.values()){
 			if  (k.getKorisnickoIme().compareTo(_username) == 0)
 				return null;
@@ -83,8 +84,8 @@ public class RegistrationWindow extends JFrame{
 		JPasswordField passT= new JPasswordField();
 		passT.setBounds(150,280, 200,30);
 		
-		JLabel errT= new JLabel("<html><font color='red'>Error: Username taken.Please try again! </font></html>");
-		errT.setBounds(150,200, 150,60);
+		JLabel errT= new JLabel("<html><font color='red'>*Missing data or username taken </font></html>");
+		errT.setBounds(150,290, 250,60);
 		errT.setVisible(false);
 		setSize(new Dimension(450,450));
 		setResizable(false);
