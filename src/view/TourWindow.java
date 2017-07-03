@@ -158,7 +158,7 @@ public class TourWindow extends JFrame{
 							}
 						}
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
+						//catch cockblock
 						e.printStackTrace();
 					}
 				}
