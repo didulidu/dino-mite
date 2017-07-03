@@ -13,9 +13,18 @@ public class Obilazak {
 	protected Grad grad;
 	protected int brMjesta;
 	protected HashMap<String, ArrayList<String>> komentari = new HashMap<String, ArrayList<String>>(); //kljuc: username, vrednost: lista komentara
+	protected double cena;
 	
 	
 	
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
+
 	public HashMap<String, ArrayList<String>> getKomentari() {
 		return komentari;
 	}
@@ -123,7 +132,7 @@ public class Obilazak {
 			}
 			linija = linija + ";" + k.getKorisnickoIme();
 		}
-		return linija+"\n";
+		return linija+"|"+this.cena+"\n";
 	}
 	
 	
