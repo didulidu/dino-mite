@@ -14,7 +14,7 @@ import view.StartWindow;
 import view.TourWindow;
 
 public class Aplikacija {
-	public static Korisnik trenutni = new Korisnik();
+	public static Korisnik trenutni = null;
 	public static HashMap<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
 	public static HashMap<String, Obilazak> sviObilasci = new HashMap<String, Obilazak>();
 	public static HashMap<String, Grad> gradovi = new HashMap<String, Grad>();
@@ -37,7 +37,7 @@ public class Aplikacija {
 		}
     	StartWindow ex = new StartWindow();
         ex.setVisible(true);
-        //TourWindow tw = new TourWindow();
+        //TourWindow tw = new TourWindow("1");
         //tw.setVisible(true);
       
         
