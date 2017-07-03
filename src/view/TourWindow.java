@@ -51,7 +51,7 @@ public class TourWindow extends JFrame {
         //this.pack();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        for (Korisnik k:)
+        //for (Korisnik k:)
 		
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
