@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -101,4 +102,36 @@ public class Korisnik {
 	}
 
 	
+	public void dodavanjeTermina(Obilazak ob, Date datum){
+		Izvodjenje izv = new Izvodjenje();
+		Kreiran s = new Kreiran();
+		s.setIzvodjenje(izv);
+		izv.promijeniStanje(s);
+		izv.setObilazak(ob);
+		izv.setTermin(datum);
+		izv.setBrMjesta(ob.getBrMjesta());
+		String[] lista = ob.getIzvodjenja().get(ob.getIzvodjenja().size()-1).getIdIzv().split(".");
+		Integer br = Integer.parseInt(lista[1])+1;
+		izv.setIdIzv(lista[0]+"."+br);
+		ob.getIzvodjenja().add(izv);
+	}
+	
+	public void kreiranjeObilaska(String naziv, ArrayList<Lokacija> loks, int brm, String g){
+		Obilazak ob = new Obilazak();
+		ob.setBrMjesta(brm);
+		ob.setGrad(Aplikacija.gradovi.get(g));
+		ob.setIdOb(Aplikacija.sviObilasci.size()+1+"");
+		ob.setLokacije(loks);
+		ob.setNaziv(naziv);
+		ob.setVodic(this);
+	}
+	
+	public void brisanjeObilaska(String id){
+		Obilazak del = Aplikacija.sviObilasci.get(id);
+		this.getVodic().remove(del);
+		for(Korisnik k : del.getTuristiPrisutni()){
+			k.getTurista().remove(del);
+		}
+		Aplikacija.sviObilasci.remove(id);
+	}
 }

@@ -13,20 +13,23 @@ public class Kreiran extends Stanje{
 
 	@Override
 	public void otkazanTermin() {
-		// TODO Auto-generated method stub
-		
+		Otkazan s = new Otkazan();
+		s.setIzvodjenje(this.izvodjenje);
+		this.izvodjenje.promijeniStanje(s);
 	}
 
 	@Override
 	public void prijavaNaTermin() {
-		// TODO Auto-generated method stub
-		
+		if(this.izvodjenje.brMjesta==0){
+			Popunjen s = new Popunjen();
+			s.setIzvodjenje(this.izvodjenje);
+			this.izvodjenje.promijeniStanje(s);
+		}
 	}
 
 	@Override
 	public void odjavaOdTermina() {
-		// TODO Auto-generated method stub
-		
+		//ne radi nista, ostaje u ovom stanju
 	}
 
 	@Override

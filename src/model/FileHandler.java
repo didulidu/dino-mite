@@ -126,6 +126,7 @@ public class FileHandler {
 				Popunjen s = new Popunjen();
 				izv.setStanje(s);
 			}
+			izv.getStanje().setIzvodjenje(izv);
 			String[] help = lista[3].split(";");
 			HashMap<Korisnik, String> turisti = izv.getTuristi();
 			for(String i : help){
@@ -141,7 +142,7 @@ public class FileHandler {
 		
 		//ucitavanje komentara
 		fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"komentari.txt");
-		cit = new BufferedReader(new FileReader(fajl.getCanonicalPath()));
+		cit = new BufferedReader(new FileReader(fajl.getAbsolutePath()));
 		while((linija=cit.readLine())!=null){
 			lista = linija.split("\\|");
 			if (!Aplikacija.sviObilasci.get(lista[0]).getKomentari().containsKey(lista[1])){
@@ -188,5 +189,6 @@ public class FileHandler {
 				}
 			}
 		}
+		pis.close();
 	}
 }

@@ -13,8 +13,9 @@ public class Popunjen extends Stanje{
 
 	@Override
 	public void otkazanTermin() {
-		// TODO Auto-generated method stub
-		
+		Otkazan s = new Otkazan();
+		s.setIzvodjenje(this.getIzvodjenje());
+		this.izvodjenje.promijeniStanje(s);
 	}
 
 	@Override
@@ -25,21 +26,20 @@ public class Popunjen extends Stanje{
 
 	@Override
 	public void odjavaOdTermina() {
-		// TODO Auto-generated method stub
-		
+		Kreiran s = new Kreiran();
+		s.setIzvodjenje(this.getIzvodjenje());
+		this.getIzvodjenje().promijeniStanje(s);
 	}
 
 	@Override
 	public void poceoObilazak() {
-		// TODO Auto-generated method stub
-		
+		UToku s = new UToku();
+		s.setIzvodjenje(this.getIzvodjenje());
+		this.getIzvodjenje().promijeniStanje(s);
 	}
 
 	@Override
 	public void zavrsenObilazak() {
-		// TODO Auto-generated method stub
 		
 	}
-	
-	
 }
