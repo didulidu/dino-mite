@@ -80,7 +80,7 @@ public class Izvodjenje {
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 		String linija;
-		linija = obilazak.getIdOb()+"|"+idIzv+"|"+brMjesta+"|"+stanje.toString()+"|";
+		linija = obilazak.getIdOb()+"|"+idIzv+"|"+stanje.toString()+"|";
 		boolean i=true;
 		for(Korisnik k : turisti.keySet()){
 			if(i){

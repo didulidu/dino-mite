@@ -105,7 +105,7 @@ public class Obilazak {
 	@Override
 	public String toString() {
 		String linija;
-		linija = getIdOb()+"|"+getGrad().getNaziv()+"|"+getVodic().getKorisnickoIme();
+		linija = getIdOb()+"|"+this.brMjesta+"|"+this.naziv+"|"+getGrad().getNaziv()+"|"+getVodic().getKorisnickoIme();
 		boolean i = true;
 		for(Lokacija l : getLokacije()){
 			if (i){
