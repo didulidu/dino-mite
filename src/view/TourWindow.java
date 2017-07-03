@@ -35,6 +35,7 @@ public class TourWindow extends JFrame{
 	private DefaultTableModel model;
 	private String idObilaska;
 	private JButton dugmeRezervisi;
+	private Obilazak o= null;
 	
 	
 	private void fillComboBox() {
@@ -111,7 +112,7 @@ public class TourWindow extends JFrame{
 		add(galerija);
 		
 	
-		Obilazak o= null;
+		
 		for (String id:Aplikacija.sviObilasci.keySet()){
 			if (id.compareTo(idObilaska)==0){
 				o=Aplikacija.sviObilasci.get(idObilaska);
@@ -124,11 +125,30 @@ public class TourWindow extends JFrame{
 		dugmeRezervisi = new JButton("Purchase" );
 		dugmeRezervisi.setBounds(320, 150, 90, 25);
 		add(dugmeRezervisi);
-		
+		if (Aplikacija.trenutni!=null){
+			if (o.getVodic().equals(Aplikacija.trenutni)){
+				dugmeRezervisi.setVisible(false);
+			}
+		}
+		if (Aplikacija.trenutni==null){
+			dugmeRezervisi.setVisible(false);
+		}
+				
 		
 		dugmeRezervisi.addActionListener((ActionEvent event) -> {
-			//dd
-			//ReservationWindow();//prosledjuju se termin, username korisnika
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
+			String termin = box.getSelectedItem().toString();
+			for (Izvodjenje i:o.getIzvodjenja()){
+				try {
+					if (i.getTermin()==sdf.parse(termin)){
+						ReservationWindow rezProzor = new ReservationWindow(i);//prosledjuje se izvodjenje
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		});
 		
 	}
