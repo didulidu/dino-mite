@@ -30,13 +30,13 @@ public class Zavrsen extends Stanje {
 	}
 
 	@Override
-	public void poceoObilazak() {
+	public void poceloIzvodjenje() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void zavrsenObilazak() {
+	public void zavrsenoIzvodjenje() {
 		// TODO Auto-generated method stub
 		
 	}

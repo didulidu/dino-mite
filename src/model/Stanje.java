@@ -7,8 +7,8 @@ public abstract class Stanje {
 	public abstract void otkazanTermin();
 	public abstract void prijavaNaTermin();
 	public abstract void odjavaOdTermina();
-	public abstract void poceoObilazak();
-	public abstract void zavrsenObilazak();
+	public abstract void poceloIzvodjenje();
+	public abstract void zavrsenoIzvodjenje();
 	
 	public Izvodjenje getIzvodjenje() {
 		return izvodjenje;

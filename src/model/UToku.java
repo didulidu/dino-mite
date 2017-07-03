@@ -30,13 +30,13 @@ public class UToku extends Stanje {
 	}
 
 	@Override
-	public void poceoObilazak() {
+	public void poceloIzvodjenje() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void zavrsenObilazak() {
+	public void zavrsenoIzvodjenje() {
 		Zavrsen s = new Zavrsen();
 		s.setIzvodjenje(this.getIzvodjenje());
 		this.getIzvodjenje().promijeniStanje(s);

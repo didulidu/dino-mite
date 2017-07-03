@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import view.StartWindow;
 //import view.TourWindow;
+import view.TourWindow;
 
 public class Aplikacija {
 	public static Korisnik trenutni = new Korisnik();
@@ -34,9 +35,9 @@ public class Aplikacija {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	StartWindow ex = new StartWindow();
-        ex.setVisible(true);
-        //TourWindow tw = new TourWindow("Vladina kuca");
+    	//StartWindow ex = new StartWindow();
+        //ex.setVisible(true);
+        TourWindow tw = new TourWindow("Vladina kuca");
 
         for(Obilazak o : sviObilasci.values()){
         	System.out.println(o.getNaziv());
@@ -45,11 +46,11 @@ public class Aplikacija {
         
         
         //na kraju
-        try {
+        /*try {
 			FileHandler.upisUFajl();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 }
