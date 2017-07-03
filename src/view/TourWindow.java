@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -43,9 +44,7 @@ public class TourWindow extends JFrame{
 		box = new JComboBox<>();
 		box.addItem("");
 		for (Izvodjenje i : Aplikacija.sviObilasci.get(idObilaska).getIzvodjenja()){
-			if (i.getObilazak().getIdOb().compareTo(idObilaska)==0){
-				box.addItem(sdf.format(i.getTermin()));
-			}
+			box.addItem(sdf.format(i.getTermin()));
 		}
 	}
 	
@@ -88,7 +87,7 @@ public class TourWindow extends JFrame{
 		add(box);
 		
 		//box.addItemListener(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		
@@ -138,16 +137,33 @@ public class TourWindow extends JFrame{
 		dugmeRezervisi.addActionListener((ActionEvent event) -> {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 			String termin = box.getSelectedItem().toString();
-			for (Izvodjenje i:o.getIzvodjenja()){
-				try {
-					if (i.getTermin()==sdf.parse(termin)){
-						ReservationWindow rezProzor = new ReservationWindow(i);//prosledjuje se izvodjenje
+			if (termin.compareTo("")==0){
+				JOptionPane.showMessageDialog(null, "You didn't choose the date");
+			}else{
+				for (Izvodjenje i:o.getIzvodjenja()){
+					try {
+						if (i.getTermin()==sdf.parse(termin)){
+							if (o.getCena()>Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()){
+								JOptionPane.showMessageDialog(null, "Not enough money on your card!");
+							}
+							else if (i.getTuristi().containsKey(Aplikacija.trenutni)){
+								System.out.println("usao");
+								JOptionPane.showMessageDialog(null, "You've already booked this tour!");
+								
+							}
+							else{
+								System.out.println("nasao");
+								ReservationWindow rezProzor = new ReservationWindow(i);//prosledjuje se izvodjenje
+								
+							}
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
+			
 			
 		});
 		
