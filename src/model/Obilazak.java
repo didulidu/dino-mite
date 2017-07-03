@@ -7,7 +7,7 @@ public class Obilazak {
 	protected String idOb;
 	protected String naziv;
 	protected ArrayList<Lokacija> lokacije;
-	protected ArrayList<Izvodjenje> izvodjenja;
+	protected HashMap<String, Izvodjenje> izvodjenja;
 	protected ArrayList<Korisnik> turistiPrisutni;
 	protected Korisnik vodic;
 	protected Grad grad;
@@ -67,11 +67,11 @@ public class Obilazak {
 
 	public Obilazak(){
 		lokacije = new ArrayList<Lokacija>();
-		izvodjenja = new ArrayList<Izvodjenje>();
+		izvodjenja = new HashMap<String,Izvodjenje>();
 		turistiPrisutni = new ArrayList<Korisnik>();
 	}
 
-	public Obilazak(String idOb, ArrayList<Lokacija> lokacije, ArrayList<Izvodjenje> izvodjenja, Korisnik vodic) {
+	public Obilazak(String idOb, ArrayList<Lokacija> lokacije, HashMap<String,Izvodjenje> izvodjenja, Korisnik vodic) {
 		super();
 		this.idOb = idOb;
 		this.lokacije = lokacije;
@@ -95,11 +95,11 @@ public class Obilazak {
 		this.lokacije = lokacije;
 	}
 
-	public ArrayList<Izvodjenje> getIzvodjenja() {
+	public HashMap<String, Izvodjenje> getIzvodjenja() {
 		return izvodjenja;
 	}
 
-	public void setIzvodjenja(ArrayList<Izvodjenje> izvodjenja) {
+	public void setIzvodjenja(HashMap<String, Izvodjenje> izvodjenja) {
 		this.izvodjenja = izvodjenja;
 	}
 

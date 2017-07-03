@@ -113,7 +113,7 @@ public class Korisnik {
 		String[] lista = ob.getIzvodjenja().get(ob.getIzvodjenja().size()-1).getIdIzv().split(".");
 		Integer br = Integer.parseInt(lista[1])+1;
 		izv.setIdIzv(lista[0]+"."+br);
-		ob.getIzvodjenja().add(izv);
+		ob.getIzvodjenja().put(izv.getIdIzv(), izv);
 	}
 	
 	public void kreiranjeObilaska(String naziv, ArrayList<Lokacija> loks, int brm, String g){

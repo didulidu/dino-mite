@@ -130,19 +130,12 @@ public class UserWindow extends JFrame{
 			      JTable target = (JTable)e.getSource();
 			      int row = target.getSelectedRow();
 			      int column = target.getSelectedColumn();
-			      String naz = (String)tabela.getModel().getValueAt(row, column);
-			      String id="";
-			      for(Obilazak o : Aplikacija.sviObilasci.values()){
-			    	  if(o.getNaziv().compareTo(naz)==0){
-			    		  id = o.getIdOb();
-			    		  break;
-			    	  }
-			      }
-			      TourWindow tw = new TourWindow(id);
+			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
+			      TourWindow tw = new TourWindow(Aplikacija.sviObilasci.get(lista[0]).getIdOb());
 			      tw.setVisible(true);
 			    }
 			  }
-			});
+		});
 		
 		//dodavanje obilazaka koje je korisnik kreirao kao vodic
 		
@@ -158,6 +151,18 @@ public class UserWindow extends JFrame{
 		tabelaVodic.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
 		tabelaVodic.setRowHeight(50);
 		tabelaVodic.setBackground(new Color(255,102,102));
+		tabelaVodic.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable target = (JTable)e.getSource();
+			      int row = target.getSelectedRow();
+			      int column = target.getSelectedColumn();
+			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
+			      TourWindow tw = new TourWindow(Aplikacija.sviObilasci.get(lista[0]).getIdOb());
+			      tw.setVisible(true);
+			    }
+			  }
+		});
 		obilasciKaoVodic = new JScrollPane(tabelaVodic);
 		obilasciKaoVodic.setBounds(40, 420, 250, 250);
 		obilasciKaoVodic.getViewport().setBackground(new Color(153,204,255));
@@ -177,6 +182,19 @@ public class UserWindow extends JFrame{
 		tabelaIzvodjenja.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
 		tabelaIzvodjenja.setRowHeight(50);
 		tabelaIzvodjenja.setBackground(new Color(255,102,102));
+		tabelaIzvodjenja.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable target = (JTable)e.getSource();
+			      int row = target.getSelectedRow();
+			      int column = target.getSelectedColumn();
+			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
+			      String[] idovi = lista[0].split("\\.");
+			      IzvWindow iw = new IzvWindow(Aplikacija.sviObilasci.get(idovi[0]).getIzvodjenja().get(lista[0]).getIdIzv());
+			      iw.setVisible(true);
+			    }
+			  }
+		});
 		izvodjenja = new JScrollPane(tabelaIzvodjenja);
 		izvodjenja.setBounds(450, 250, 250, 450);
 		izvodjenja.getViewport().setBackground(new Color(153,204,255));
@@ -190,7 +208,7 @@ public class UserWindow extends JFrame{
 	private void popuniTabeluObilazaka(DefaultTableModel model, ArrayList<Obilazak> lista){
 		model.setRowCount(0);
 		for(Obilazak o : lista){
-			model.addRow(new Object[] {o.getNaziv()});
+			model.addRow(new Object[] {o.getIdOb()+"|"+o.getNaziv()});
 		}
 	}
 	
@@ -198,8 +216,8 @@ public class UserWindow extends JFrame{
 		model.setRowCount(0);
 		SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
 		for(Obilazak o : lista){
-			for(Izvodjenje iz : o.getIzvodjenja()){
-				model.addRow(new Object[] {iz.getObilazak().getNaziv()+"|"+termin.format(iz.getTermin())});
+			for(Izvodjenje iz : o.getIzvodjenja().values()){
+				model.addRow(new Object[] {iz.getIdIzv()+"|"+iz.getObilazak().getNaziv()+"|"+termin.format(iz.getTermin())});
 			}
 		}
 	}

@@ -43,7 +43,7 @@ public class TourWindow extends JFrame{
 		SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 		box = new JComboBox<>();
 		box.addItem("");
-		for (Izvodjenje i : Aplikacija.sviObilasci.get(idObilaska).getIzvodjenja()){
+		for (Izvodjenje i : Aplikacija.sviObilasci.get(idObilaska).getIzvodjenja().values()){
 			box.addItem(sdf.format(i.getTermin()));
 		}
 	}
@@ -140,7 +140,7 @@ public class TourWindow extends JFrame{
 			if (termin.compareTo("")==0){
 				JOptionPane.showMessageDialog(null, "You didn't choose the date");
 			}else{
-				for (Izvodjenje i:o.getIzvodjenja()){
+				for (Izvodjenje i:o.getIzvodjenja().values()){
 					try {
 						if (i.getTermin()==sdf.parse(termin)){
 							if (o.getCena()>Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()){
@@ -158,7 +158,9 @@ public class TourWindow extends JFrame{
 							}
 						}
 					} catch (Exception e) {
-						//catch cockblock
+						//push cock
+						//and then pull it
+						// ;))))
 						e.printStackTrace();
 					}
 				}
