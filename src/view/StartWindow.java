@@ -89,7 +89,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		setTitle("DinoMite");
 		ImageIcon image = new ImageIcon("./src/slike/dinamit.png");
 		setIconImage(image.getImage());
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
@@ -110,6 +110,14 @@ public class StartWindow extends JFrame implements ItemListener {
 			      int row = target.getSelectedRow();
 			      int column = target.getSelectedColumn();
 			      // do some action if appropriate column
+			      String x = (String) tabela.getModel().getValueAt(row, column);
+			      System.out.println(x);
+			      for (Obilazak k: Aplikacija.sviObilasci.values()){
+			    	  if (x.compareTo(k.getNaziv())==0){
+			    		  TourWindow t = new TourWindow(k.getIdOb());
+			    		  t.setVisible(true);
+			    	  }
+			      }
 			    }
 			  }
 			});
