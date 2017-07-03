@@ -35,10 +35,10 @@ public class Aplikacija {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	//StartWindow ex = new StartWindow();
-        //ex.setVisible(true);
-        StartWindow tw = new StartWindow();
-        tw.setVisible(true);
+    	StartWindow ex = new StartWindow();
+        ex.setVisible(true);
+        //TourWindow tw = new TourWindow();
+        //tw.setVisible(true);
       
         
         
