@@ -108,9 +108,9 @@ public class FileHandler {
 			lista = linija.split("\\|");
 			String[] help = lista[0].split("\\.");
 			Izvodjenje izv = new Izvodjenje();
-			ArrayList<Izvodjenje> temp = Aplikacija.sviObilasci.get(help[0]).getIzvodjenja();
+			HashMap<String,Izvodjenje> temp = Aplikacija.sviObilasci.get(help[0]).getIzvodjenja();
 			izv.setObilazak(Aplikacija.sviObilasci.get(help[0]));
-			izv.setIdIzv(help[1]);
+			izv.setIdIzv(lista[0]);
 			izv.setBrMjesta(izv.getObilazak().getBrMjesta());
 			if(lista[1].compareTo("kreiran")==0){
 				Kreiran s = new Kreiran();
@@ -137,7 +137,7 @@ public class FileHandler {
 			}
 			izv.setTermin(termin.parse(lista[3]));
 			izv.setTuristi(turisti);
-			temp.add(izv);
+			temp.put(izv.getIdIzv(), izv);
 			Aplikacija.sviObilasci.get(help[0]).setIzvodjenja(temp);
 		}
 		cit.close();
@@ -176,7 +176,7 @@ public class FileHandler {
 		PrintWriter pis2 = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
 		for(Obilazak o : Aplikacija.sviObilasci.values()){
 			pis.write(o.toString());
-			for(Izvodjenje izv : o.getIzvodjenja()){
+			for(Izvodjenje izv : o.getIzvodjenja().values()){
 				pis2.write(izv.toString());
 			}
 		}
