@@ -65,6 +65,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		box.setBounds(100, 200, 100, 25);  
 		add(display);
 		add(box);
+		System.out.println("print samo da bih promenio fajl da bih mogao opet da pokusam da pushujem");
 		box.addItemListener(this);
 		setTitle("DinoMite");
 		ImageIcon image = new ImageIcon("./src/slike/dinamit.png");
