@@ -32,14 +32,14 @@ public class Popunjen extends Stanje{
 	}
 
 	@Override
-	public void poceoObilazak() {
+	public void poceloIzvodjenje() {
 		UToku s = new UToku();
 		s.setIzvodjenje(this.getIzvodjenje());
 		this.getIzvodjenje().promijeniStanje(s);
 	}
 
 	@Override
-	public void zavrsenObilazak() {
+	public void zavrsenoIzvodjenje() {
 		
 	}
 }

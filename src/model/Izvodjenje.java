@@ -93,11 +93,11 @@ public class Izvodjenje {
 		return linija+"|"+sdf.format(termin)+"\n";
 	}
 	
-	public void zapocniObilazak(){
-		this.stanje.poceoObilazak();
+	public void zapocniIzvodjenje(){
+		this.stanje.poceloIzvodjenje();
 	}
 	
-	public void otkazivanjeObilaska(){
+	public void otkazivanjeIzvodjenja(){
 		this.brMjesta=0;
 		this.stanje.otkazanTermin();
 	}
@@ -118,7 +118,7 @@ public class Izvodjenje {
 		this.setStanje(s);
 	}
 	
-	public void zavrsiObilazak(){
+	public void zavrsiIzvodjenje(){
 		ArrayList<Korisnik> temp = this.obilazak.getTuristiPrisutni();
 		for(Korisnik k: this.turisti.keySet()){
 			if(this.turisti.get(k).compareTo("bio")==0){
@@ -129,6 +129,6 @@ public class Izvodjenje {
 			k.setTurista(obs);
 		}
 		this.obilazak.setTuristiPrisutni(temp);
-		this.stanje.zavrsenObilazak();
+		this.stanje.zavrsenoIzvodjenje();
 	}
 }
