@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,7 +31,7 @@ public class StartWindow extends JFrame implements ItemListener {
 	private String[] cities;
 	private Object[][] podaci = new Object[][] {};
 	private JTable tabela;
-	private String[] ime = { "<html><font color='red'>Obilasci: </font></html>" };
+	private String[] ime = { "<html><font color='red'>Tours: </font></html>" };
 	private DefaultTableModel model;
 	private String username;
 	private String password;
@@ -72,7 +74,7 @@ public class StartWindow extends JFrame implements ItemListener {
 	private void initUI() {
 		setLayout(null);
 
-		display = new JLabel("Grad: ");
+		display = new JLabel("City: ");
 		JLabel naslov = new JLabel(new ImageIcon("./src/slike/naslov.png"));
 		naslov.setBounds(140, 10, 677, 98);
 		add(naslov);
@@ -101,6 +103,18 @@ public class StartWindow extends JFrame implements ItemListener {
 		tabela.setFont(new Font("f", Font.BOLD, 30));
 		tabela.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 40));
 
+		tabela.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			      JTable target = (JTable)e.getSource();
+			      int row = target.getSelectedRow();
+			      int column = target.getSelectedColumn();
+			      // do some action if appropriate column
+			    }
+			  }
+			});
+		
+		
 		tabela.setRowHeight(50);
 		JScrollPane galerija = new JScrollPane(tabela);
 		galerija.setBounds(40, 300, 500, 400);
@@ -143,14 +157,16 @@ public class StartWindow extends JFrame implements ItemListener {
 			username = userT.getText();
 			password = passT.getText();
 			System.out.println(password);
-			Korisnik k = checkLogIn();
-			if (k == null) {
+			Aplikacija.trenutni = checkLogIn();
+			if (Aplikacija.trenutni == null) {
 				errT.setVisible(true);
 				userT.setText("");
 				passT.setText("");
 			} else {
 				errT.setVisible(false);
-				dispose();
+				UserWindow uw = new UserWindow(Aplikacija.trenutni);
+				uw.setVisible(true);
+				//dispose();
 			}
 		});
 		
