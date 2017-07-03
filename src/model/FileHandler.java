@@ -97,6 +97,7 @@ public class FileHandler {
 			vodic.add(ob);
 			Aplikacija.korisnici.get(lista[4]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
+			ob.setCena(Double.parseDouble(lista[7]));
 			Aplikacija.sviObilasci.put(lista[0], ob);
 		}
 		cit.close();
@@ -152,6 +153,7 @@ public class FileHandler {
 			Aplikacija.sviObilasci.get(lista[0]).getKomentari().get(lista[1]).add(lista[2]);
 		}
 		cit.close();
+		
 	}
 	
 	public static void upisUFajl() throws IOException{
@@ -191,5 +193,6 @@ public class FileHandler {
 			}
 		}
 		pis.close();
+		
 	}
 }
