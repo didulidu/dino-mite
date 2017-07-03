@@ -62,7 +62,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		setSize(1000, 800);
 		display.setBounds(40, 200, 150, 25);
 		display.setFont(new Font("fontic", Font.BOLD, 20));
-		box.setBounds(100, 200, 100, 25);
+		box.setBounds(100, 200, 100, 25);  
 		add(display);
 		add(box);
 		box.addItemListener(this);
