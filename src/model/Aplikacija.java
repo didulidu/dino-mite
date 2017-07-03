@@ -37,12 +37,9 @@ public class Aplikacija {
 		}
     	//StartWindow ex = new StartWindow();
         //ex.setVisible(true);
-        TourWindow tw = new TourWindow("Vladina kuca");
-
-        for(Obilazak o : sviObilasci.values()){
-        	System.out.println(o.getNaziv());
-
-        }
+        StartWindow tw = new StartWindow();
+        tw.setVisible(true);
+      
         
         
         //na kraju
