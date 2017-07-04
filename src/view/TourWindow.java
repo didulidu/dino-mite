@@ -142,7 +142,7 @@ public class TourWindow extends JFrame{
 			}else{
 				for (Izvodjenje i:o.getIzvodjenja().values()){
 					try {
-						if (i.getTermin()==sdf.parse(termin)){
+						if (sdf.format(i.getTermin()).compareTo(termin)==0){
 							if (o.getCena()>Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()){
 								JOptionPane.showMessageDialog(null, "Not enough money on your card!");
 							}
@@ -150,6 +150,8 @@ public class TourWindow extends JFrame{
 								System.out.println("usao");
 								JOptionPane.showMessageDialog(null, "You've already booked this tour!");
 								
+							}else if (i.getBrMjesta()==o.getBrMjesta()){
+								JOptionPane.showMessageDialog(null, "No more free space for chosen tour on this date!");
 							}
 							else{
 								System.out.println("nasao");

@@ -14,7 +14,7 @@ import model.Izvodjenje;
 
 public class ReservationWindow extends JFrame{
 	Izvodjenje i;
-	JLabel uspesno = new JLabel("You've successfuly joined this tour!");
+	//JLabel uspesno = new JLabel("You've successfuly joined this tour!");
 	JLabel sigurno = new JLabel("Are you sure you want to book this tour?");
 	
 	JButton YesBook = new JButton("Yes");
@@ -29,11 +29,12 @@ public class ReservationWindow extends JFrame{
 		setTitle("Reservation");
 		ImageIcon ikonica = new ImageIcon("./src/slike/dinami.png");
 		setIconImage(ikonica.getImage());
-		this.setSize(200, 100);
+		this.setSize(350, 200);
 		
-		sigurno.setBounds(10,5, 150, 100);
-		CancelBook.setBounds(50,70, 25, 15);
-		YesBook.setBounds(10, 70, 25, 15);
+		
+		CancelBook.setBounds(20,100, 80, 30);
+		YesBook.setBounds(150, 100, 80, 30);
+		sigurno.setBounds(1000,1000, 150, 100);
 		
 		this.add(YesBook);
 		this.add(CancelBook);

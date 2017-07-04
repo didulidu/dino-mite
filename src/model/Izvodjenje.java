@@ -131,4 +131,5 @@ public class Izvodjenje {
 		this.obilazak.setTuristiPrisutni(temp);
 		this.stanje.zavrsenoIzvodjenje();
 	}
+	//d
 }
