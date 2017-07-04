@@ -86,7 +86,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		display.setFont(new Font("fontic", Font.BOLD, 20));
 		box.setBounds(100, 200, 100, 25);
 		add(display);
-		add(box);   
+		add(box);
 		box.addItemListener(this);
 		setTitle("DinoMite");
 		ImageIcon image = new ImageIcon("./src/slike/dinamit.png");
@@ -106,25 +106,24 @@ public class StartWindow extends JFrame implements ItemListener {
 		tabela.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 40));
 
 		tabela.addMouseListener(new MouseAdapter() {
-			  public void mouseClicked(MouseEvent e) {
-			    if (e.getClickCount() == 2) {
-			      JTable target = (JTable)e.getSource();
-			      int row = target.getSelectedRow();
-			      int column = target.getSelectedColumn();
-			      // do some action if appropriate column
-			      String x = (String) tabela.getModel().getValueAt(row, column);
-			      System.out.println(x);
-			      for (Obilazak k: Aplikacija.sviObilasci.values()){
-			    	  if (x.compareTo(k.getNaziv())==0){
-			    		  TourWindow t = new TourWindow(k.getIdOb());
-			    		  t.setVisible(true);
-			    	  }
-			      }
-			    }
-			  }
-			});
-		
-		
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					JTable target = (JTable) e.getSource();
+					int row = target.getSelectedRow();
+					int column = target.getSelectedColumn();
+					// do some action if appropriate column
+					String x = (String) tabela.getModel().getValueAt(row, column);
+					System.out.println(x);
+					for (Obilazak k : Aplikacija.sviObilasci.values()) {
+						if (x.compareTo(k.getNaziv()) == 0) {
+							TourWindow t = new TourWindow(k.getIdOb());
+							t.setVisible(true);
+						}
+					}
+				}
+			}
+		});
+
 		tabela.setRowHeight(50);
 		JScrollPane galerija = new JScrollPane(tabela);
 		galerija.setBounds(40, 300, 500, 400);
@@ -144,19 +143,25 @@ public class StartWindow extends JFrame implements ItemListener {
 		userT.setBounds(750, 310, 200, 25);
 		JPasswordField passT = new JPasswordField();
 		passT.setBounds(750, 360, 200, 25);
-
 		JLabel errT = new JLabel(
 				"<html><font color='red'>*Incorrect username and/or passwort.Please try again! </font></html>");
 		errT.setFont(new Font("error", Font.CENTER_BASELINE, 20));
 		errT.setBounds(600, 250, 350, 50);
 		errT.setVisible(false);
-		JButton regB = new JButton("<html><font color='blue'>Register </font></html>" );
+		JButton regB = new JButton("<html><font color='blue'>Register </font></html>");
 		JLabel regL = new JLabel("<html><font color='white'>Don't have an account? Register for FREE </font></html>");
-		
-		
 		JButton logOut = new JButton("<html><font color='blue'>Log out</font></html>");
-		logOut.setBounds(700, 480, 100, 30);	
-		logOut.addActionListener((ActionEvent event) ->{
+		logOut.setVisible(false);
+		logOut.setBounds(850, 480, 100, 30);
+		
+		JButton seeAcc = new JButton("<html><font color='green'>Account</font></html>");
+		seeAcc.setBounds(730, 480, 100, 30);
+		seeAcc.setVisible(false);
+		seeAcc.addActionListener((ActionEvent event) ->{
+			uw.setVisible(true);
+		});
+		
+		logOut.addActionListener((ActionEvent event) -> {
 			Aplikacija.trenutni = null;
 			uw.dispose();
 			userT.setVisible(true);
@@ -168,10 +173,11 @@ public class StartWindow extends JFrame implements ItemListener {
 			ok.setVisible(true);
 			cancel.setVisible(true);
 			logOut.setVisible(false);
+			seeAcc.setVisible(false);
 			passT.setText("");
 			userT.setText("");
 		});
-		
+		add(seeAcc);
 		add(logOut);
 		add(cancel);
 		add(ok);
@@ -196,6 +202,7 @@ public class StartWindow extends JFrame implements ItemListener {
 				userT.setText("");
 				passT.setText("");
 			} else {
+				seeAcc.setVisible(true);
 				errT.setVisible(false);
 				userT.setVisible(false);
 				passT.setVisible(false);
@@ -205,15 +212,15 @@ public class StartWindow extends JFrame implements ItemListener {
 				regL.setVisible(false);
 				logOut.setVisible(true);
 				uw = new UserWindow(Aplikacija.trenutni);
-				uw.setVisible(true);
+				uw.setVisible(false);
 				ok.setVisible(false);
 				cancel.setVisible(false);
-				//dispose();
+				// dispose();
 			}
 		});
-		
-		//registracija
-		
+
+		// registracija
+
 		regL.setBounds(600, 440, 300, 50);
 		regB.setBounds(700, 480, 100, 30);
 		add(regL);
@@ -229,6 +236,6 @@ public class StartWindow extends JFrame implements ItemListener {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			fillTable(e.getItem().toString());
 		}
-	} 
+	}
 
 }
