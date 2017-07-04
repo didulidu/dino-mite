@@ -90,7 +90,7 @@ public class Izvodjenje {
 			}
 			linija=linija+";"+k.getKorisnickoIme()+"/"+turisti.get(k);
 		}
-		return linija+"|"+sdf.format(termin)+"\n";
+		return linija+"|"+sdf.format(termin)+"|"+this.brMjesta+"\n";
 	}
 	
 	public void zapocniIzvodjenje(){

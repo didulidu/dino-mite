@@ -137,6 +137,7 @@ public class FileHandler {
 			}
 			izv.setTermin(termin.parse(lista[3]));
 			izv.setTuristi(turisti);
+			izv.setBrMjesta(Integer.parseInt(lista[4]));
 			temp.put(izv.getIdIzv(), izv);
 			Aplikacija.sviObilasci.get(help[0]).setIzvodjenja(temp);
 		}
