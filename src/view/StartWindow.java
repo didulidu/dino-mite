@@ -35,6 +35,8 @@ public class StartWindow extends JFrame implements ItemListener {
 	private DefaultTableModel model;
 	private String username;
 	private String password;
+	private RegistrationWindow regWin;
+	private UserWindow uw;
 
 	// Proverava ispravnost unetih podataka pri logovanju
 	private Korisnik checkLogIn() {
@@ -148,6 +150,29 @@ public class StartWindow extends JFrame implements ItemListener {
 		errT.setFont(new Font("error", Font.CENTER_BASELINE, 20));
 		errT.setBounds(600, 250, 350, 50);
 		errT.setVisible(false);
+		JButton regB = new JButton("<html><font color='blue'>Register </font></html>" );
+		JLabel regL = new JLabel("<html><font color='white'>Don't have an account? Register for FREE </font></html>");
+		
+		
+		JButton logOut = new JButton("<html><font color='blue'>Log out</font></html>");
+		logOut.setBounds(700, 480, 100, 30);	
+		logOut.addActionListener((ActionEvent event) ->{
+			Aplikacija.trenutni = null;
+			uw.dispose();
+			userT.setVisible(true);
+			passT.setVisible(true);
+			user.setVisible(true);
+			pass.setVisible(true);
+			regB.setVisible(true);
+			regL.setVisible(true);
+			ok.setVisible(true);
+			cancel.setVisible(true);
+			logOut.setVisible(false);
+			passT.setText("");
+			userT.setText("");
+		});
+		
+		add(logOut);
 		add(cancel);
 		add(ok);
 		add(user);
@@ -172,22 +197,29 @@ public class StartWindow extends JFrame implements ItemListener {
 				passT.setText("");
 			} else {
 				errT.setVisible(false);
-				UserWindow uw = new UserWindow(Aplikacija.trenutni);
+				userT.setVisible(false);
+				passT.setVisible(false);
+				user.setVisible(false);
+				pass.setVisible(false);
+				regB.setVisible(false);
+				regL.setVisible(false);
+				logOut.setVisible(true);
+				uw = new UserWindow(Aplikacija.trenutni);
 				uw.setVisible(true);
+				ok.setVisible(false);
+				cancel.setVisible(false);
 				//dispose();
 			}
 		});
 		
 		//registracija
-		JButton regB = new JButton("<html><font color='blue'>Register </font></html>" );
-		JLabel regL = new JLabel("<html><font color='white'>Don't have an account? Register for FREE </font></html>");
 		
 		regL.setBounds(600, 440, 300, 50);
 		regB.setBounds(700, 480, 100, 30);
 		add(regL);
 		add(regB);
 		regB.addActionListener((ActionEvent event) -> {
-			RegistrationWindow regWin = new RegistrationWindow();
+			regWin = new RegistrationWindow();
 		});
 	}
 
