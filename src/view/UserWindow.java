@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
@@ -27,7 +30,7 @@ import model.Izvodjenje;
 import model.Korisnik;
 import model.Obilazak;
 
-public class UserWindow extends JFrame{
+public class UserWindow extends JFrame implements ItemListener{
 	private JLabel ime;
 	private JLabel prezime;
 	private JLabel email;
@@ -37,15 +40,15 @@ public class UserWindow extends JFrame{
 	private JLabel stanje;
 	private JLabel slika;
 	private JLabel korisnickoIme;
-	private JScrollPane obilasciKaoTurista;
-	private JScrollPane obilasciKaoVodic;
-	private JScrollPane izvodjenja;
-	private Object[][] podaciTurista;
-	private Object[][] podaciVodic;
-	private Object[][] podaciIzvodjenje;
-	private String[] nazivTurista = { "<html><font color='black'>As tourist, you have visited: </font></html>"};
-	private String[] nazivVodic = { "<html><font color='black'>You have created these tours: </font></html>"};
-	private String[] nazivIzvodjenje = { "<html><font color='black'>Your scheduled tours:  </font></html>"};
+	private JTable tabela;
+	private Object[][] podaci;
+	private DefaultTableModel model;
+	private JScrollPane skrol;
+	private String[] naziv = { "<html><font color='black'>Tours: </font></html>"};
+	//private String[] nazivTurista = { "<html><font color='black'>As tourist, you have visited: </font></html>"};
+	//private String[] nazivVodic = { "<html><font color='black'>You have created these tours: </font></html>"};
+	//private String[] nazivIzvodjenje = { "<html><font color='black'>Your scheduled tours:  </font></html>"};
+	private JComboBox<String> kombo;
 	
 	private void ucitavanjePodataka(Korisnik k){
 		ime = new JLabel("Ime: 	" + k.getOsoba().getIme());
@@ -65,8 +68,6 @@ public class UserWindow extends JFrame{
 	}
 	
 	public UserWindow(Korisnik k){
-		podaciTurista = new Object[][]{};
-		podaciVodic = new Object[][]{};
 		ucitavanjePodataka(k);
 		initUI();
 	}
@@ -106,24 +107,26 @@ public class UserWindow extends JFrame{
 		add(ulica);
 		add(korisnickoIme);
 		
-		//dodavanje obilazaka koje je korisnik posjetio kao turista
-		DefaultTableModel modelTurista = new DefaultTableModel(podaciTurista, nazivTurista) {
+		postaviKomboBoks();
+		kombo.addItemListener(this);
+		
+		podaci = new Object[][]{};
+		model = new DefaultTableModel(podaci, naziv){
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		
-		popuniTabeluObilazaka(modelTurista, Aplikacija.trenutni.getTurista());
-		JTable tabela = new JTable(modelTurista);
+		tabela = new JTable(model);
 		tabela.setFont(new Font("f", Font.BOLD, 15));
 		tabela.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
 		tabela.setRowHeight(50);
 		tabela.setBackground(new Color(255,102,102));
-		obilasciKaoTurista = new JScrollPane(tabela);
-		obilasciKaoTurista.setBounds(40, 160, 250, 250);
-		obilasciKaoTurista.getViewport().setBackground(new Color(153,204,255));
-		add(obilasciKaoTurista);
+		popuniTabelu("Tours you visited as a tourist");
+		skrol = new JScrollPane(tabela);
+		skrol.setBounds(40, 160, 250, 250);
+		skrol.getViewport().setBackground(new Color(153,204,255));
+		add(skrol);
 		tabela.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
 			    if (e.getClickCount() == 2) {
@@ -131,95 +134,58 @@ public class UserWindow extends JFrame{
 			      int row = target.getSelectedRow();
 			      int column = target.getSelectedColumn();
 			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
-			      TourWindow tw = new TourWindow(Aplikacija.sviObilasci.get(lista[0]).getIdOb());
-			      tw.setVisible(true);
+			      if(lista.length!=3){
+				      TourWindow tw = new TourWindow(Aplikacija.sviObilasci.get(lista[0]).getIdOb());
+				      tw.setVisible(true);
+			      }
 			    }
 			  }
 		});
-		
-		//dodavanje obilazaka koje je korisnik kreirao kao vodic
-		
-		DefaultTableModel modelVodic = new DefaultTableModel(podaciVodic, nazivVodic){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		popuniTabeluObilazaka(modelVodic, Aplikacija.trenutni.getVodic());
-		JTable tabelaVodic = new JTable(modelVodic);
-		tabelaVodic.setFont(new Font("f", Font.BOLD, 15));
-		tabelaVodic.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
-		tabelaVodic.setRowHeight(50);
-		tabelaVodic.setBackground(new Color(255,102,102));
-		tabelaVodic.addMouseListener(new MouseAdapter() {
-			  public void mouseClicked(MouseEvent e) {
-			    if (e.getClickCount() == 2) {
-			      JTable target = (JTable)e.getSource();
-			      int row = target.getSelectedRow();
-			      int column = target.getSelectedColumn();
-			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
-			      TourWindow tw = new TourWindow(Aplikacija.sviObilasci.get(lista[0]).getIdOb());
-			      tw.setVisible(true);
-			    }
-			  }
-		});
-		obilasciKaoVodic = new JScrollPane(tabelaVodic);
-		obilasciKaoVodic.setBounds(40, 420, 250, 250);
-		obilasciKaoVodic.getViewport().setBackground(new Color(153,204,255));
-		add(obilasciKaoVodic);
-		
-		//dodavanje zakazanih izvodjenja
-		
-		DefaultTableModel modelIzvodjenja = new DefaultTableModel(podaciIzvodjenje, nazivIzvodjenje){
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		popuniTabeluIzvodjenja(modelIzvodjenja, Aplikacija.trenutni.getVodic());
-		JTable tabelaIzvodjenja = new JTable(modelIzvodjenja);
-		tabelaIzvodjenja.setFont(new Font("f", Font.BOLD, 15));
-		tabelaIzvodjenja.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
-		tabelaIzvodjenja.setRowHeight(50);
-		tabelaIzvodjenja.setBackground(new Color(255,102,102));
-		tabelaIzvodjenja.addMouseListener(new MouseAdapter() {
-			  public void mouseClicked(MouseEvent e) {
-			    if (e.getClickCount() == 2) {
-			      JTable target = (JTable)e.getSource();
-			      int row = target.getSelectedRow();
-			      int column = target.getSelectedColumn();
-			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
-			      String[] idovi = lista[0].split("\\.");
-			      IzvWindow iw = new IzvWindow(Aplikacija.sviObilasci.get(idovi[0]).getIzvodjenja().get(lista[0]).getIdIzv());
-			      iw.setVisible(true);
-			    }
-			  }
-		});
-		izvodjenja = new JScrollPane(tabelaIzvodjenja);
-		izvodjenja.setBounds(450, 250, 250, 450);
-		izvodjenja.getViewport().setBackground(new Color(153,204,255));
 		//izvodjenja.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		//izvodjenja.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		add(izvodjenja);
-		tabelaIzvodjenja.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		//tabelaIzvodjenja.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
 	}
 	
-	private void popuniTabeluObilazaka(DefaultTableModel model, ArrayList<Obilazak> lista){
-		model.setRowCount(0);
-		for(Obilazak o : lista){
-			model.addRow(new Object[] {o.getIdOb()+"|"+o.getNaziv()});
-		}
+	private void postaviKomboBoks(){
+		kombo = new JComboBox<>();
+		kombo.addItem("");
+		kombo.addItem("Tours you have visited as a tourist");
+		kombo.addItem("Tours you have created");
+		kombo.addItem("All your tours");
+		kombo.setBounds(450, 250, 100, 25);
+		add(kombo);
 	}
 	
-	private void popuniTabeluIzvodjenja(DefaultTableModel model, ArrayList<Obilazak> lista){
-		model.setRowCount(0);
-		SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
-		for(Obilazak o : lista){
-			for(Izvodjenje iz : o.getIzvodjenja().values()){
-				model.addRow(new Object[] {iz.getIdIzv()+"|"+iz.getObilazak().getNaziv()+"|"+termin.format(iz.getTermin())});
+	
+	private void popuniTabelu(String str){
+		if(str.compareTo("Tours you have visited as a tourist")==0){
+			model.setRowCount(0);
+			for(Obilazak o : Aplikacija.trenutni.getTurista()){
+				System.out.println(o.getCena());
+				model.addRow(new Object[] {o.getIdOb()+"|"+o.getNaziv()});
+			}
+		}else if (str.compareTo("Tours you have created")==0){
+			model.setRowCount(0);
+			for(Obilazak o : Aplikacija.trenutni.getVodic()){
+				model.addRow(new Object[] {o.getIdOb()+"|"+o.getNaziv()});
+			}
+		}else if (str.compareTo("All your tours")==0){
+			model.setRowCount(0);
+			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
+			for(Obilazak o : Aplikacija.trenutni.getVodic()){
+				for(Izvodjenje iz : o.getIzvodjenja().values()){
+					model.addRow(new Object[] {iz.getIdIzv()+"|"+iz.getObilazak().getNaziv()+"|"+termin.format(iz.getTermin())});
+				}
 			}
 		}
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			popuniTabelu(e.getItem().toString());
+		}	
 	}
 	
 	
