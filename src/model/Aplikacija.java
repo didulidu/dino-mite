@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,7 +40,6 @@ public class Aplikacija {
         ex.setVisible(true);
         //TourWindow tw = new TourWindow("1");
         //tw.setVisible(true);
-      
         
         
         //na kraju
