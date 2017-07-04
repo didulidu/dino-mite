@@ -19,8 +19,8 @@ public class FileHandler {
 		String linija;
 		String[] lista;
 		
-		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.YYYY.");
-		SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
+		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.yyyy.");
+		SimpleDateFormat termin = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 		
 		//ucitavanje registrovanih korisnika
 		File fajl = new File("src/fajlovi/korisnici.txt");
