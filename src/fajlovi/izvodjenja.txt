@@ -1,4 +1,4 @@
-1.1|kreiran|vladsey/bio|03.01.2012. 15:15
-1.2|kreiran|vladsey/bio;maery/bio|02.01.2012. 15:15
-2.1|zavrsen|maery/bio|05.01.2012. 15:15
-2.2|utoku|ikija/bio;maery/bio|07.01.2012. 15:15
+1.1|kreiran|vladsey/bio|03.01.2012. 15:15|9
+1.2|kreiran|vladsey/bio;maery/bio|02.01.2012. 15:15|8
+2.1|zavrsen|maery/bio|05.01.2012. 15:15|9
+2.2|utoku|ikija/bio;maery/bio|07.01.2012. 15:15|8
