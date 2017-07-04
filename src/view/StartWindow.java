@@ -229,6 +229,6 @@ public class StartWindow extends JFrame implements ItemListener {
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			fillTable(e.getItem().toString());
 		}
-	}
+	} 
 
 }
