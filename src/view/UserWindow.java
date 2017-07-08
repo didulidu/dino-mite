@@ -29,8 +29,10 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
 import model.Aplikacija;
+import model.Grad;
 import model.Izvodjenje;
 import model.Korisnik;
+import model.Lokacija;
 import model.Obilazak;
 
 public class UserWindow extends JFrame implements ItemListener{
@@ -47,6 +49,7 @@ public class UserWindow extends JFrame implements ItemListener{
 	private JScrollPane skrol;
 	private JComboBox<String> kombo;
 	private JButton dodajObilazak;
+	private JButton izbrisiProfil;
 	private Object[][] podaci;
 	private DefaultTableModel model;
 	
@@ -94,25 +97,59 @@ public class UserWindow extends JFrame implements ItemListener{
 		stanje.setBounds(50,  130, 300, 30);
 		stanje.setFont(f);
 		slika.setBounds(550, 10, 200, 200);
-		korisnickoIme.setBounds(550, 200, 200, 30);
+		korisnickoIme.setBounds(550, 180, 200, 30);
 		korisnickoIme.setFont(f);
 		
 		dodajObilazak = new JButton("Add tour");
-		dodajObilazak.setBounds(550, 250, 90, 25);
-		dodajObilazak.addActionListener((ActionEvent event)->{
-			JFrame prozorcic = new JFrame();
-			prozorcic.setSize(300, 400);
-			JTextField naziv = new JTextField();
-			JLabel lab1 = new JLabel("Input tour name: ");
-			naziv.setBounds(100, 20, 70, 30);
-			lab1.setBounds(10, 20, 70, 30);
-	
-			//prozorcic.add(naziv);
-			prozorcic.add(lab1);
-			prozorcic.setVisible(true);
-		});
-		add(dodajObilazak);
+		dodajObilazak.setBounds(50, 430, 90, 25);
 		
+		izbrisiProfil = new JButton("Delete profile");
+		izbrisiProfil.setBounds(550, 220, 200, 30);
+	
+		
+		dodajObilazak.addActionListener((ActionEvent event)->{			
+			InputWindow iw = new InputWindow();
+			iw.setVisible(true);
+			/*
+			JLabel lab2 = new JLabel("Input max number of tourists: ");
+			lab2.setBounds(550, 310, 170, 20);
+			JTextField mjesta = new JTextField();
+			mjesta.setBounds(650, 310, 150, 20);
+			
+			JLabel lab3 = new JLabel("Choose the city: ");
+			lab3.setBounds(550, 330, 100,20);
+			JComboBox<String> komb = new JComboBox<>();
+			komb.addItem("");
+			for(Grad g : Aplikacija.gradovi.values()){
+				komb.addItem(g.getNaziv());
+			}
+			komb.setBounds(550, 330, 150, 20);
+			
+			JLabel lab4 = new JLabel("Choose locations: ");
+			lab4.setBounds(550, 350, 100, 20);
+			JComboBox<String> komb2 = new JComboBox<>();
+			komb2.addItem("");
+			String grad = (String) komb.getSelectedItem();
+			if(grad.compareTo("")!=0){
+				for(Lokacija lok : Aplikacija.gradovi.get(grad).getLokacije()){
+					komb2.addItem(lok.getNaziv());
+				}
+			}
+			komb2.setBounds(550, 350, 150, 20);
+			
+			
+			add(lab4);
+			add(komb2);
+			add(lab3);
+			add(komb);
+			add(lab2);
+			add(mjesta);
+			add(lab1);
+			add(naziv);*/
+		});
+		
+		add(dodajObilazak);
+		add(izbrisiProfil);
 		add(ime);
 		add(prezime);
 		add(email);
@@ -134,15 +171,16 @@ public class UserWindow extends JFrame implements ItemListener{
 				return false;
 			}
 		};
+		
 		tabela = new JTable(model);
 		tabela.setFont(new Font("f", Font.BOLD, 15));
 		tabela.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
 		tabela.setRowHeight(50);
-		tabela.setBackground(new Color(255,102,102));
-		popuniTabelu("Tours you visited as a tourist");
+		tabela.getSelectionBackground();
+		tabela.setBackground(new Color(153,204,255));
+		
 		skrol = new JScrollPane(tabela);
-		skrol.setBounds(40, 160, 250, 250);
-		skrol.getViewport().setBackground(new Color(153,204,255));
+		skrol.setBounds(40, 160, 450, 250);
 		add(skrol);
 		tabela.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
@@ -163,9 +201,9 @@ public class UserWindow extends JFrame implements ItemListener{
 			    }
 			  }
 		});
-		//izvodjenja.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		//izvodjenja.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//tabelaIzvodjenja.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		skrol.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		skrol.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 	
 	private void postaviKomboBoks(){
@@ -174,7 +212,7 @@ public class UserWindow extends JFrame implements ItemListener{
 		kombo.addItem("Tours you have visited as a tourist");
 		kombo.addItem("Tours you have created");
 		kombo.addItem("All your tours");
-		kombo.setBounds(320, 160, 200, 20);
+		kombo.setBounds(550, 260, 200, 20);
 		add(kombo);
 	}
 	
@@ -182,23 +220,39 @@ public class UserWindow extends JFrame implements ItemListener{
 	private void popuniTabelu(String str){
 		if(str.compareTo("Tours you have visited as a tourist")==0){
 			model.setRowCount(0);
+			int longest = 0;
 			for(Obilazak o : Aplikacija.trenutni.getTurista()){
-				System.out.println(o.getCena());
 				model.addRow(new Object[] {o.getNaziv()});
+				if(o.getNaziv().length()>longest){
+					longest = o.getNaziv().length();
+				}
 			}
+			tabela.setPreferredSize(new Dimension(longest*10,model.getRowCount()*50));
 		}else if (str.compareTo("Tours you have created")==0){
 			model.setRowCount(0);
+			int longest = 0;
 			for(Obilazak o : Aplikacija.trenutni.getVodic()){
 				model.addRow(new Object[] {o.getNaziv()});
+				if(o.getNaziv().length()>longest){
+					longest = o.getNaziv().length();
+				}
 			}
+			tabela.setPreferredSize(new Dimension(longest*10,model.getRowCount()*50));
 		}else if (str.compareTo("All your tours")==0){
 			model.setRowCount(0);
+			int longest = 0;
 			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
 			for(Obilazak o : Aplikacija.trenutni.getVodic()){
 				for(Izvodjenje iz : o.getIzvodjenja().values()){
+					if(o.getNaziv().length()+iz.getTermin().toString().length()>longest){
+						longest = o.getNaziv().length()+iz.getTermin().toString().length();
+					}
 					model.addRow(new Object[] {iz.getObilazak().getNaziv()+"|"+termin.format(iz.getTermin())});
 				}
 			}
+			tabela.setPreferredSize(new Dimension(longest*6,model.getRowCount()*50));
+		}else{
+			model.setRowCount(0);
 		}
 	}
 
@@ -207,8 +261,5 @@ public class UserWindow extends JFrame implements ItemListener{
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			popuniTabelu(e.getItem().toString());
 		}	
-	}
-	
-	
-	
+	}	
 }
