@@ -105,6 +105,16 @@ public class FileHandler {
 			Aplikacija.korisnici.get(lista[4]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
 			ob.setCena(Double.parseDouble(lista[7]));
+			
+			if (lista[8].compareTo("aktuelan")==0){
+				AktuelanObilazak a = new AktuelanObilazak();
+				ob.setStanjeObilaska(a);
+			}else{
+				NeaktuelanObilazak a = new NeaktuelanObilazak();
+				ob.setStanjeObilaska(a);
+			}
+			
+			
 			Aplikacija.sviObilasci.put(lista[0], ob);
 		}
 		cit.close();

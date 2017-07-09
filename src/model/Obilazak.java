@@ -134,7 +134,7 @@ public class Obilazak {
 			}
 			linija = linija + ";" + k.getKorisnickoIme();
 		}
-		return linija+"|"+this.cena+"\n";
+		return linija+"|"+this.cena+"|"+stanjeObilaska.toString()+"\n";
 	}
 	
 	public void promeniStanje(StanjeObilaska s){

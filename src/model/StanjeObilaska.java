@@ -25,4 +25,12 @@ public abstract class StanjeObilaska {
 	public void setUpis(String upis) {
 		this.upis = upis;
 	}
+
+
+	@Override
+	public String toString() {
+		return upis;
+	}
+	
+	
 }
