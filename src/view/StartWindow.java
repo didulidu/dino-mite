@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 import model.Aplikacija;
@@ -93,7 +94,11 @@ public class StartWindow extends JFrame implements ItemListener {
 		setTitle("DinoMite");
 		ImageIcon image = new ImageIcon("./src/slike/dinamit.png");
 		setIconImage(image.getImage());
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		addWindowListener(new WindowEventHandler());
+	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//
+		
 		setLocationRelativeTo(null);
 		setResizable(false);
 
