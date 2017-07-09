@@ -226,7 +226,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		
 		
 		//obrisiNalog = new JButton("Delete profile");
-		//obrisiNalog.setBounds(550, 220, 200, 30);
+		//obrisiNalog.setBounds(550, 220, 200, 30);//
 		obrisiNalog.addActionListener((ActionEvent)->{
 			//dodati ovo dugme u StartWindow?
 			JFrame sure = new JFrame();
