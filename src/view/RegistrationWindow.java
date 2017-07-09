@@ -56,7 +56,7 @@ public class RegistrationWindow extends JFrame {
 		}
 		System.out.println("pre");
 		Korisnik kori = new Korisnik(_username, _password,
-				new Osoba(_name, _lName, _jmbg, _street, _birth, (genID +1) + "", 0, "vlada996"), true);
+				new Osoba(_name, _lName, _jmbg, _street, _birth, (genID +1) + "", 0, _email), true);
 		System.out.println("kooora: " + kori);
 		genID+=1;
 		Aplikacija.korisnici.put(_username, kori);
