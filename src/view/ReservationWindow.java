@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import model.Aplikacija;
 import model.Izvodjenje;
+import model.Popunjen;
 
 public class ReservationWindow extends JFrame{
 	Izvodjenje i;
@@ -50,7 +51,14 @@ public class ReservationWindow extends JFrame{
 		
 		
 		YesBook.addActionListener((ActionEvent event) -> {
-			//metoda za rezervaciju
+			i.setBrMjesta(i.getBrMjesta()-1);
+			if (i.getBrMjesta()==0){
+				Popunjen p = new Popunjen();
+				p.setIzvodjenje(i);
+				i.promijeniStanje(p);
+			}
+			i.getTuristi().put(Aplikacija.trenutni, "tba");
+			Aplikacija.trenutni.getOsoba().setStanjeNaRacunu(Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()-i.getObilazak().getCena());
 			JOptionPane.showMessageDialog(null, "You've successfuly joined this tour!");
 			this.dispose();
 			
