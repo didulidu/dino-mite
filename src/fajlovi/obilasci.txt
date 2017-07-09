@@ -1,4 +1,4 @@
-1|10|Hotspot u Modrici! Najbolja zurka!|Modrica|ikija|Ikijina Kuca|vladsey|300
-2|10|Popijte kavu u centru|Modrica|ikija|Centar|vladsey;maery|500
-3|5|Najbitnije u gradu!|Novi Sad|vladsey|Kej;Centar;Spens|ikija|400
-4|15|Popijte pivo i opustite se|Novi Sad|maery|Kej;Spens|ikija;vladsey|200
+1|10|Hotspot u Modrici! Najbolja zurka!|Modrica|ikija|Ikijina Kuca|vladsey;maery|300.0|3
+2|10|Popijte kavu u centru|Modrica|ikija|Centar|vladsey;maery|500.0|3
+3|5|Najbitnije u gradu!|Novi Sad|vladsey|Kej;Centar;Spens|ikija|400.0|1
+4|15|Popijte pivo i opustite se|Novi Sad|maery|Kej;Spens|ikija;vladsey|200.0|1

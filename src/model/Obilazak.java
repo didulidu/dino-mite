@@ -14,8 +14,15 @@ public class Obilazak {
 	protected int brMjesta;
 	protected HashMap<String, ArrayList<String>> komentari = new HashMap<String, ArrayList<String>>(); //kljuc: username, vrednost: lista komentara
 	protected double cena;
+	protected int nextIdIzv;
 	
-	
+	public int getNextIdIzv() {
+		return nextIdIzv;
+	}
+
+	public void setNextIdIzv(int nextIdIzv) {
+		this.nextIdIzv = nextIdIzv;
+	}
 	
 	public double getCena() {
 		return cena;
@@ -66,6 +73,7 @@ public class Obilazak {
 	}
 
 	public Obilazak(){
+		this.nextIdIzv=1;
 		lokacije = new ArrayList<Lokacija>();
 		izvodjenja = new HashMap<String,Izvodjenje>();
 		turistiPrisutni = new ArrayList<Korisnik>();
@@ -73,6 +81,7 @@ public class Obilazak {
 
 	public Obilazak(String idOb, ArrayList<Lokacija> lokacije, HashMap<String,Izvodjenje> izvodjenja, Korisnik vodic) {
 		super();
+		this.nextIdIzv=1;
 		this.idOb = idOb;
 		this.lokacije = lokacije;
 		this.izvodjenja = izvodjenja;
@@ -132,7 +141,7 @@ public class Obilazak {
 			}
 			linija = linija + ";" + k.getKorisnickoIme();
 		}
-		return linija+"|"+this.cena+"\n";
+		return linija+"|"+this.cena+"|"+this.getNextIdIzv()+"\n";
 	}
 	
 	

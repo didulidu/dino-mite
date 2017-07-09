@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -29,8 +30,10 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
 import model.Aplikacija;
+import model.Grad;
 import model.Izvodjenje;
 import model.Korisnik;
+import model.Lokacija;
 import model.Obilazak;
 
 public class UserWindow extends JFrame implements ItemListener{
@@ -47,6 +50,7 @@ public class UserWindow extends JFrame implements ItemListener{
 	private JScrollPane skrol;
 	private JComboBox<String> kombo;
 	private JButton dodajObilazak;
+	private JButton izbrisiProfil;
 	private Object[][] podaci;
 	private DefaultTableModel model;
 	
@@ -58,7 +62,7 @@ public class UserWindow extends JFrame implements ItemListener{
 		jmbg = new JLabel("Jmbg: " + k.getOsoba().getJmbg());
 		korisnickoIme = new JLabel(k.getKorisnickoIme());
 		ulica = new JLabel("Ulica: "+k.getOsoba().getUlica());
-		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.YYYY.");
+		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.yyyy.");
 		datumRodj = new JLabel("Datum rodjenja:	 " + datRodj.format(k.getOsoba().getDatumRodjenja()));
 		stanje = new JLabel("Stanje racuna: 	" + k.getOsoba().getStanjeNaRacunu());
 		ImageIcon ii= new ImageIcon("./src/slike/naslov.png");
@@ -94,25 +98,42 @@ public class UserWindow extends JFrame implements ItemListener{
 		stanje.setBounds(50,  130, 300, 30);
 		stanje.setFont(f);
 		slika.setBounds(550, 10, 200, 200);
-		korisnickoIme.setBounds(550, 200, 200, 30);
+		korisnickoIme.setBounds(550, 180, 200, 30);
 		korisnickoIme.setFont(f);
 		
 		dodajObilazak = new JButton("Add tour");
-		dodajObilazak.setBounds(550, 250, 90, 25);
-		dodajObilazak.addActionListener((ActionEvent event)->{
-			JFrame prozorcic = new JFrame();
-			prozorcic.setSize(300, 400);
-			JTextField naziv = new JTextField();
-			JLabel lab1 = new JLabel("Input tour name: ");
-			naziv.setBounds(100, 20, 70, 30);
-			lab1.setBounds(10, 20, 70, 30);
-	
-			//prozorcic.add(naziv);
-			prozorcic.add(lab1);
-			prozorcic.setVisible(true);
-		});
-		add(dodajObilazak);
+		dodajObilazak.setBounds(50, 430, 90, 25);
 		
+		izbrisiProfil = new JButton("Delete profile");
+		izbrisiProfil.setBounds(550, 220, 200, 30);
+		izbrisiProfil.addActionListener((ActionEvent)->{
+			//dodati ovo dugme u StartWindow?
+			JFrame sure = new JFrame();
+			sure.setLayout(null);
+			sure.setSize(350, 120);
+			JLabel lab = new JLabel("Are you sure you want to delete your profile?");
+			lab.setBounds(10,10,300,20);
+			JButton yes = new JButton("Yes");
+			JButton cancel = new JButton("Cancel");
+			yes.setBounds(40,40,100,20);
+			cancel.setBounds(150,40,100,20);
+			yes.addActionListener((ActionEvent e)->{
+			});
+			
+			sure.add(yes);
+			sure.add(cancel);
+			sure.add(lab);
+			sure.setVisible(true);
+		});
+	
+		
+		dodajObilazak.addActionListener((ActionEvent event)->{			
+			InputWindow iw = new InputWindow();
+			iw.setVisible(true);
+		});
+		
+		add(dodajObilazak);
+		add(izbrisiProfil);
 		add(ime);
 		add(prezime);
 		add(email);
@@ -134,15 +155,16 @@ public class UserWindow extends JFrame implements ItemListener{
 				return false;
 			}
 		};
+		
 		tabela = new JTable(model);
 		tabela.setFont(new Font("f", Font.BOLD, 15));
 		tabela.getTableHeader().setFont(new Font("f", Font.BOLD, 15));
 		tabela.setRowHeight(50);
-		tabela.setBackground(new Color(255,102,102));
-		popuniTabelu("Tours you visited as a tourist");
+		tabela.getSelectionBackground();
+		tabela.setBackground(new Color(153,204,255));
+		
 		skrol = new JScrollPane(tabela);
-		skrol.setBounds(40, 160, 250, 250);
-		skrol.getViewport().setBackground(new Color(153,204,255));
+		skrol.setBounds(40, 160, 450, 250);
 		add(skrol);
 		tabela.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
@@ -163,9 +185,9 @@ public class UserWindow extends JFrame implements ItemListener{
 			    }
 			  }
 		});
-		//izvodjenja.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		//izvodjenja.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		//tabelaIzvodjenja.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		skrol.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		skrol.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		tabela.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 	
 	private void postaviKomboBoks(){
@@ -174,7 +196,7 @@ public class UserWindow extends JFrame implements ItemListener{
 		kombo.addItem("Tours you have visited as a tourist");
 		kombo.addItem("Tours you have created");
 		kombo.addItem("All your tours");
-		kombo.setBounds(320, 160, 200, 20);
+		kombo.setBounds(550, 260, 200, 20);
 		add(kombo);
 	}
 	
@@ -182,23 +204,39 @@ public class UserWindow extends JFrame implements ItemListener{
 	private void popuniTabelu(String str){
 		if(str.compareTo("Tours you have visited as a tourist")==0){
 			model.setRowCount(0);
+			int longest = 0;
 			for(Obilazak o : Aplikacija.trenutni.getTurista()){
-				System.out.println(o.getCena());
 				model.addRow(new Object[] {o.getNaziv()});
+				if(o.getNaziv().length()>longest){
+					longest = o.getNaziv().length();
+				}
 			}
+			tabela.setPreferredSize(new Dimension(longest*10,model.getRowCount()*50));
 		}else if (str.compareTo("Tours you have created")==0){
 			model.setRowCount(0);
+			int longest = 0;
 			for(Obilazak o : Aplikacija.trenutni.getVodic()){
 				model.addRow(new Object[] {o.getNaziv()});
+				if(o.getNaziv().length()>longest){
+					longest = o.getNaziv().length();
+				}
 			}
+			tabela.setPreferredSize(new Dimension(longest*10,model.getRowCount()*50));
 		}else if (str.compareTo("All your tours")==0){
 			model.setRowCount(0);
-			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
+			int longest = 0;
+			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 			for(Obilazak o : Aplikacija.trenutni.getVodic()){
 				for(Izvodjenje iz : o.getIzvodjenja().values()){
+					if(o.getNaziv().length()+iz.getTermin().toString().length()>longest){
+						longest = o.getNaziv().length()+iz.getTermin().toString().length();
+					}
 					model.addRow(new Object[] {iz.getObilazak().getNaziv()+"|"+termin.format(iz.getTermin())});
 				}
 			}
+			tabela.setPreferredSize(new Dimension(longest*6,model.getRowCount()*50));
+		}else{
+			model.setRowCount(0);
 		}
 	}
 
@@ -207,8 +245,5 @@ public class UserWindow extends JFrame implements ItemListener{
 		if (e.getStateChange() == ItemEvent.SELECTED) {
 			popuniTabelu(e.getItem().toString());
 		}	
-	}
-	
-	
-	
+	}	
 }

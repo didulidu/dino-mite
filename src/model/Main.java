@@ -9,9 +9,10 @@ import java.util.Iterator;
 
 public class Main {
 	
-	public static void main(String[] args) throws NumberFormatException, ParseException {
+	public static void main(String[] args) throws NumberFormatException, ParseException, IOException {
 		Aplikacija ap = new Aplikacija();
 		ap.pokreni();
+		
 		
 	}
 }
