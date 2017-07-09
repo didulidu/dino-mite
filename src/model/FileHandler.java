@@ -105,8 +105,6 @@ public class FileHandler {
 			Aplikacija.korisnici.get(lista[4]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
 			ob.setCena(Double.parseDouble(lista[7]));
-			Integer next = Integer.parseInt(lista[8]);
-			ob.setNextIdIzv(next);
 			Aplikacija.sviObilasci.put(lista[0], ob);
 		}
 		cit.close();

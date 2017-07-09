@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import model.Aplikacija;
+import model.Izbrisan;
 import model.Korisnik;
 import model.Obilazak;
 
@@ -239,12 +240,37 @@ public class StartWindow extends JFrame implements ItemListener {
 			yes.setBounds(40,40,100,20);
 			canc.setBounds(150,40,100,20);
 			yes.addActionListener((ActionEvent e)->{
+				//promena stanja korisnika
+				Izbrisan stanjeIzbrisan = new Izbrisan();
+				stanjeIzbrisan.setKorisnik(Aplikacija.trenutni);
+				Aplikacija.trenutni.promijeniStanje(stanjeIzbrisan);
+				Aplikacija.trenutni = null;
+				uw.dispose();
+				userT.setVisible(true);
+				passT.setVisible(true);
+				user.setVisible(true);
+				pass.setVisible(true);
+				regB.setVisible(true);
+				regL.setVisible(true);
+				ok.setVisible(true);
+				cancel.setVisible(true);
+				logOut.setVisible(false);
+				seeAcc.setVisible(false);
+				passT.setText("");
+				userT.setText("");
+				
+				
+			});
+			canc.addActionListener((ActionEvent e)->{
+				sure.dispose();
 			});
 			
 			sure.add(yes);
 			sure.add(canc);
 			sure.add(lab);
 			sure.setVisible(true);
+			
+			
 		});
 		
 

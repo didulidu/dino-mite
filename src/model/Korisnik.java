@@ -126,8 +126,8 @@ public class Korisnik {
 		izv.setObilazak(ob);
 		izv.setTermin(datum);
 		izv.setBrMjesta(ob.getBrMjesta());
-		izv.setIdIzv(ob.getIdOb()+"."+ob.getNextIdIzv());
-		ob.setNextIdIzv(ob.getNextIdIzv()+1);
+		int b = ob.getIzvodjenja().size()+1;
+		izv.setIdIzv(ob.getIdOb()+"."+b);
 		ob.getIzvodjenja().put(izv.getIdIzv(), izv);
 	}
 	
