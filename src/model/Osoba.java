@@ -22,6 +22,7 @@ public class Osoba {
 	public Osoba(String ime, String prezime, String jmbg, String ulica, Date datumRodjenja, String brojRacuna,
 			double stanjeNaRacunu, String email) {
 		super();
+		//ispis
 		this.ime = ime;
 		this.prezime = prezime;
 		this.jmbg = jmbg;
