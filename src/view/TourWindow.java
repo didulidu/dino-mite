@@ -30,6 +30,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Aplikacija;
 import model.Izvodjenje;
 import model.Korisnik;
+import model.Lokacija;
 import model.Obilazak;
 
 public class TourWindow extends JFrame{
@@ -45,8 +46,11 @@ public class TourWindow extends JFrame{
 	private JButton dugmeZakazi;
 	private Obilazak o= null;
 	private String user="";
-	
-	
+	///
+	private JTable tabelaIzvodjenja;
+	private DefaultTableModel modelIzvodjenja;
+	private String[] ime2 = {"<html><font color='red'>Locations </font></html>"};
+	private Object[][] podaci2 = new Object[][]{};
 	private void fillComboBox() {
 		SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 		
@@ -66,14 +70,19 @@ public class TourWindow extends JFrame{
 		}
 		
 	}
-	
+	private void fillLocations(){
+		modelIzvodjenja.setRowCount(0);
+		Obilazak o = Aplikacija.sviObilasci.get(idObilaska);
+		for(Lokacija l : o.getLokacije()){
+			modelIzvodjenja.addRow(new Object[]{l.getNaziv()});
+		}
+	}
 	public TourWindow(String idObilaska){
 		this.idObilaska=idObilaska;
 		fillComboBox();
 		initIU();
 	}
 
-	
 	public void initIU(){
 		setLayout(null);
 		labelaTermini = new JLabel("Dates:");
@@ -110,7 +119,7 @@ public class TourWindow extends JFrame{
 		
 		
 		tabela = new JTable(model);
-		tabela.setFont(new Font("f", Font.BOLD, 10));
+		tabela.setFont(new Font("f", Font.BOLD, 20));
 		tabela.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 30));
 		
 		tabela.setRowHeight(30);
@@ -120,12 +129,32 @@ public class TourWindow extends JFrame{
 		galerija.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		add(galerija);
 		
-	
 		
+	
+		////
+		modelIzvodjenja = new DefaultTableModel(podaci2, ime2) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		tabelaIzvodjenja = new JTable(modelIzvodjenja);
+		tabelaIzvodjenja.setFont(new Font("f", Font.BOLD, 20));
+		tabelaIzvodjenja.getTableHeader().setFont(new Font("fontizvodjenja", Font.BOLD, 20));
+		
+		tabelaIzvodjenja.setRowHeight(20);
+		JScrollPane galerijaIzvodjenja = new JScrollPane(tabelaIzvodjenja);
+		galerijaIzvodjenja.setBounds(40, 550, 200, 200);
+		galerijaIzvodjenja.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		galerijaIzvodjenja.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		add(galerijaIzvodjenja);
+		fillLocations();
+		////
 		for (String id:Aplikacija.sviObilasci.keySet()){
 			if (id.compareTo(idObilaska)==0){
 				o=Aplikacija.sviObilasci.get(idObilaska);
 				naslov.setText(Aplikacija.sviObilasci.get(idObilaska).getNaziv());
+			//?	break;
 			}
 		}
 
