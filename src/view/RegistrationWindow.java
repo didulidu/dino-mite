@@ -190,3 +190,4 @@ public class RegistrationWindow extends JFrame {
 	}
 
 }
+ 
