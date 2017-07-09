@@ -62,7 +62,7 @@ public class UserWindow extends JFrame implements ItemListener{
 		jmbg = new JLabel("Jmbg: " + k.getOsoba().getJmbg());
 		korisnickoIme = new JLabel(k.getKorisnickoIme());
 		ulica = new JLabel("Ulica: "+k.getOsoba().getUlica());
-		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.YYYY.");
+		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.yyyy.");
 		datumRodj = new JLabel("Datum rodjenja:	 " + datRodj.format(k.getOsoba().getDatumRodjenja()));
 		stanje = new JLabel("Stanje racuna: 	" + k.getOsoba().getStanjeNaRacunu());
 		ImageIcon ii= new ImageIcon("./src/slike/naslov.png");
