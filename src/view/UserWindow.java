@@ -157,17 +157,15 @@ public class UserWindow extends JFrame implements ItemListener{
 			      int column = target.getSelectedColumn();
 			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
 			      if(((String)kombo.getSelectedItem()).compareTo("Your guidances")==0){
-			    	  if(lista[2].compareTo("kreiran")==0){
 			    		  for(Obilazak o : Aplikacija.trenutni.getVodic()){
 			    			  for(Izvodjenje izv : o.getIzvodjenja().values()){
 					    		  if(o.getNaziv().compareTo(lista[0])==0 && termin.format(izv.getTermin()).compareTo(lista[1])==0){
-					    			  IzvWindow iw = new IzvWindow(izv.getIdIzv());
+					    			  IzvWindow iw = new IzvWindow(izv);
 					    			  iw.setVisible(true);
 					    			  break;
 					    		  }
 			    			  }
 				    	  }
-			    	  }
 			      }else if(((String)kombo.getSelectedItem()).compareTo("Tours you purchased")==0){
 	    			  JFrame otkaz = new JFrame();
 	    			  otkaz.setLayout(null);
