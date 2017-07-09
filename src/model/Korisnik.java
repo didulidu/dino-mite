@@ -163,7 +163,18 @@ public class Korisnik {
 	
 	public void izmeniNaObrisano(){
 		for (Obilazak o:vodic){
-			//o.
+			o.getStanjeObilaska().izbrisanObilazak(); //postavljanje svih njegovih obilazaka na obrisane
+			//brisanje svih izvodjenja
+			for (String idIzv:o.getIzvodjenja().keySet()){
+				
+				if (o.getIzvodjenja().get(idIzv).getStanje().upis.compareTo("kreiran")==0){
+					for (Korisnik k:o.getIzvodjenja().get(idIzv).getTuristi().keySet()){
+						k.getOsoba().setStanjeNaRacunu(k.getOsoba().getStanjeNaRacunu()+o.getCena());
+					}
+				}
+				
+				o.getIzvodjenja().get(idIzv).getStanje().otkazanTermin();
+			}
 		}
 	}
 }

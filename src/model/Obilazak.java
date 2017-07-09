@@ -14,6 +14,7 @@ public class Obilazak {
 	protected int brMjesta;
 	protected HashMap<String, ArrayList<String>> komentari = new HashMap<String, ArrayList<String>>(); //kljuc: username, vrednost: lista komentara
 	protected double cena;
+	protected StanjeObilaska stanjeObilaska;
 	
 	public double getCena() {
 		return cena;
@@ -67,6 +68,7 @@ public class Obilazak {
 		lokacije = new ArrayList<Lokacija>();
 		izvodjenja = new HashMap<String,Izvodjenje>();
 		turistiPrisutni = new ArrayList<Korisnik>();
+		stanjeObilaska=new AktuelanObilazak();
 	}
 
 	public Obilazak(String idOb, ArrayList<Lokacija> lokacije, HashMap<String,Izvodjenje> izvodjenja, Korisnik vodic) {
@@ -75,7 +77,9 @@ public class Obilazak {
 		this.lokacije = lokacije;
 		this.izvodjenja = izvodjenja;
 		this.vodic = vodic;
+		stanjeObilaska=new AktuelanObilazak();
 	}
+	
 
 	public String getIdOb() {
 		return idOb;
@@ -132,6 +136,20 @@ public class Obilazak {
 		}
 		return linija+"|"+this.cena+"\n";
 	}
+	
+	public void promeniStanje(StanjeObilaska s){
+		stanjeObilaska=s;
+	}
+
+	public StanjeObilaska getStanjeObilaska() {
+		return stanjeObilaska;
+	}
+
+	public void setStanjeObilaska(StanjeObilaska stanjeObilaska) {
+		this.stanjeObilaska = stanjeObilaska;
+	}
+	
+	
 	
 	
 }
