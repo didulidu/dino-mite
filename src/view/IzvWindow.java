@@ -77,6 +77,7 @@ public class IzvWindow extends JFrame{
 			izv.zapocniIzvodjenje();
 			beginGuidance.setVisible(false);
 			endGuidance.setVisible(true);
+			cancelGuidance.setVisible(false);
 		});
 		
 		endGuidance.addActionListener((ActionEvent ev)->{
