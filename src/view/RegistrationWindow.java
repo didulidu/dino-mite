@@ -16,6 +16,7 @@ import model.Aplikacija;
 import model.Korisnik;
 import model.Main;
 import model.Osoba;
+import model.Registrovan;
 
 public class RegistrationWindow extends JFrame{
 
@@ -37,7 +38,10 @@ public class RegistrationWindow extends JFrame{
 			if  (k.getKorisnickoIme().compareTo(_username) == 0)
 				return null;
 		}
-		Aplikacija.korisnici.put(_username, new Korisnik(_username,_password,new Osoba(_name, _lName, _jmbg, _street),true));
+		Korisnik kor = new Korisnik(_username,_password,new Osoba(_name, _lName, _jmbg, _street),true);
+		Registrovan s = new Registrovan();
+		kor.setStanje(s);
+		Aplikacija.korisnici.put(_username, kor);
 		
 		return new Korisnik();
 	}

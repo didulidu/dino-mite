@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Korisnik {
 	protected boolean registrovan;
 	protected ArrayList<Obilazak> vodic;
 	protected ArrayList<Obilazak> turista;
+	protected StanjeKorisnika stanje;
 	
 	public Korisnik(){
 		this.vodic = new ArrayList<Obilazak>();
@@ -93,12 +95,26 @@ public class Korisnik {
 	public void setTurista(ArrayList<Obilazak> turista) {
 		this.turista = turista;
 	}
+	
+	public StanjeKorisnika getStanje() {
+		return stanje;
+	}
+
+
+	public void setStanje(StanjeKorisnika stanje) {
+		this.stanje = stanje;
+	}
+
+
+	public void setRegistrovan(boolean registrovan) {
+		this.registrovan = registrovan;
+	}
 
 
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.YYYY.");
-		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+"|"+sdf.format(osoba.getDatumRodjenja())+"|"+osoba.getBrojRacuna()+"|"+osoba.getStanjeNaRacunu()+"|"+osoba.getEmail()+"\n";
+		return korisnickoIme+"|"+lozinka+"|"+osoba.getIme()+"|"+osoba.getPrezime()+"|"+osoba.getJmbg()+"|"+osoba.getUlica()+"|"+sdf.format(osoba.getDatumRodjenja())+"|"+osoba.getBrojRacuna()+"|"+osoba.getStanjeNaRacunu()+"|"+osoba.getEmail()+"|"+this.getStanje().upis+"\n";
 	}
 
 	
@@ -110,13 +126,12 @@ public class Korisnik {
 		izv.setObilazak(ob);
 		izv.setTermin(datum);
 		izv.setBrMjesta(ob.getBrMjesta());
-		String[] lista = ob.getIzvodjenja().get(ob.getIzvodjenja().size()-1).getIdIzv().split(".");
-		Integer br = Integer.parseInt(lista[1])+1;
-		izv.setIdIzv(lista[0]+"."+br);
+		izv.setIdIzv(ob.getIdOb()+"."+ob.getNextIdIzv());
+		ob.setNextIdIzv(ob.getNextIdIzv()+1);
 		ob.getIzvodjenja().put(izv.getIdIzv(), izv);
 	}
 	
-	public void kreiranjeObilaska(String naziv, ArrayList<Lokacija> loks, int brm, String g){
+	public void kreiranjeObilaska(String naziv, ArrayList<Lokacija> loks, int brm, String g, double cijena){
 		Obilazak ob = new Obilazak();
 		ob.setBrMjesta(brm);
 		ob.setGrad(Aplikacija.gradovi.get(g));
@@ -124,6 +139,8 @@ public class Korisnik {
 		ob.setLokacije(loks);
 		ob.setNaziv(naziv);
 		ob.setVodic(this);
+		ob.setCena(cijena);
+		Aplikacija.sviObilasci.put(ob.getIdOb(), ob);
 	}
 	
 	public void brisanjeObilaska(String id){
@@ -133,5 +150,9 @@ public class Korisnik {
 			k.getTurista().remove(del);
 		}
 		Aplikacija.sviObilasci.remove(id);
+	}
+	
+	public void promijeniStanje(StanjeKorisnika s){
+		this.setStanje(s);
 	}
 }

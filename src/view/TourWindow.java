@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +42,7 @@ public class TourWindow extends JFrame{
 	private DefaultTableModel model;
 	private String idObilaska;
 	private JButton dugmeRezervisi;
+	private JButton dugmeZakazi;
 	private Obilazak o= null;
 	private String user="";
 	
@@ -179,13 +181,52 @@ public class TourWindow extends JFrame{
 		dugmeRezervisi = new JButton("Purchase" );
 		dugmeRezervisi.setBounds(320, 150, 90, 25);
 		add(dugmeRezervisi);
+		dugmeZakazi = new JButton("Add a date");
+		dugmeZakazi.setBounds(320,150,120,25);
+		add(dugmeZakazi);
 		if (o.getVodic().getKorisnickoIme().compareTo(user)==0){
 			dugmeRezervisi.setVisible(false);
+		}else{
+			dugmeZakazi.setVisible(false);
 		}
 		if (Aplikacija.trenutni==null){
 			dugmeRezervisi.setVisible(false);
+			dugmeZakazi.setVisible(false);
 		}
-				
+		
+		dugmeZakazi.addActionListener((ActionEvent event)->{
+			JFrame dejt = new JFrame();
+			dejt.setLayout(null);
+			dejt.setSize(350, 120);
+			JLabel lab = new JLabel("Input date(dd.mm.yyyy. hh:mm): ");
+			JTextField tekst = new JTextField();
+			lab.setBounds(30, 10, 200, 20);
+			tekst.setBounds(220, 10, 100, 20);
+			JButton dugme = new JButton("Done");
+			dugme.setBounds(130,60,100,20);
+			dugme.addActionListener((ActionEvent e)->{
+				SimpleDateFormat termin = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
+				Date d = null;
+				boolean uspio = true;
+				try{
+					d = termin.parse(tekst.getText());
+				}catch(Exception e1){
+					uspio = false;
+					tekst.setText("");
+					JOptionPane.showMessageDialog(null, "Invalid input - input in format dd.mm.yyyy. hh:mm!");
+				}
+				if(uspio){
+					Aplikacija.trenutni.dodavanjeTermina(o, d);
+					dejt.dispatchEvent(new WindowEvent(dejt, WindowEvent.WINDOW_CLOSING));
+				}
+				//ubaciti refresh combobox
+			});
+			dejt.add(dugme);
+			
+			dejt.add(lab);
+			dejt.add(tekst);
+			dejt.setVisible(true);
+		});
 		
 		dugmeRezervisi.addActionListener((ActionEvent event) -> {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy. HH:mm");

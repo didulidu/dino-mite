@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JFrame;
+
 import view.StartWindow;
 //import view.TourWindow;
 import view.TourWindow;
@@ -30,7 +32,7 @@ public class Aplikacija {
 		return instance;
 	}
 	
-	void pokreni() throws NumberFormatException, ParseException{
+	void pokreni() throws NumberFormatException, ParseException, IOException{
 		try {
 			FileHandler.ucitavanje();
 		} catch (IOException e) {
@@ -40,7 +42,6 @@ public class Aplikacija {
         ex.setVisible(true);
         //TourWindow tw = new TourWindow("1");
         //tw.setVisible(true);
-        
         
         //na kraju
         /*try {

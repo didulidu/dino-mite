@@ -32,6 +32,13 @@ public class FileHandler {
 			lista = linija.split("\\|");
 			Osoba os = new Osoba(lista[2], lista[3], lista[4], lista[5],datRodj.parse(lista[6]),lista[7],Double.parseDouble(lista[8]),lista[9]);
 			Korisnik kor = new Korisnik(lista[0], lista[1], os, true);
+			if(lista[10].compareTo("registrovan")==0){
+				Registrovan s = new Registrovan();
+				kor.setStanje(s);
+			}else{
+				Izbrisan s = new Izbrisan();
+				kor.setStanje(s);
+			}
 			Aplikacija.korisnici.put(lista[0], kor);
 		}
 		cit.close();
@@ -98,6 +105,8 @@ public class FileHandler {
 			Aplikacija.korisnici.get(lista[4]).setVodic(vodic);
 			ob.setTuristiPrisutni(turisti);
 			ob.setCena(Double.parseDouble(lista[7]));
+			Integer next = Integer.parseInt(lista[8]);
+			ob.setNextIdIzv(next);
 			Aplikacija.sviObilasci.put(lista[0], ob);
 		}
 		cit.close();
@@ -132,13 +141,11 @@ public class FileHandler {
 			String[] h = lista[2].split(";");
 			HashMap<Korisnik, String> turisti = izv.getTuristi();
 			for(String i : h){
+				if(i.isEmpty()){
+					continue;
+				}
 				String[] prijavljeniTurista = i.split("/");
 				turisti.put(Aplikacija.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
-			}
-			for (Korisnik koris:turisti.keySet()){
-				if (turisti.get(koris).compareTo("bio")==0){
-					izv.getObilazak().getTuristiPrisutni().add(koris);
-				}
 			}
 			izv.setTermin(termin.parse(lista[3]));
 			izv.setTuristi(turisti);

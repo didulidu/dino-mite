@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -105,47 +106,30 @@ public class UserWindow extends JFrame implements ItemListener{
 		
 		izbrisiProfil = new JButton("Delete profile");
 		izbrisiProfil.setBounds(550, 220, 200, 30);
+		izbrisiProfil.addActionListener((ActionEvent)->{
+			//dodati ovo dugme u StartWindow?
+			JFrame sure = new JFrame();
+			sure.setLayout(null);
+			sure.setSize(350, 120);
+			JLabel lab = new JLabel("Are you sure you want to delete your profile?");
+			lab.setBounds(10,10,300,20);
+			JButton yes = new JButton("Yes");
+			JButton cancel = new JButton("Cancel");
+			yes.setBounds(40,40,100,20);
+			cancel.setBounds(150,40,100,20);
+			yes.addActionListener((ActionEvent e)->{
+			});
+			
+			sure.add(yes);
+			sure.add(cancel);
+			sure.add(lab);
+			sure.setVisible(true);
+		});
 	
 		
 		dodajObilazak.addActionListener((ActionEvent event)->{			
 			InputWindow iw = new InputWindow();
 			iw.setVisible(true);
-			/*
-			JLabel lab2 = new JLabel("Input max number of tourists: ");
-			lab2.setBounds(550, 310, 170, 20);
-			JTextField mjesta = new JTextField();
-			mjesta.setBounds(650, 310, 150, 20);
-			
-			JLabel lab3 = new JLabel("Choose the city: ");
-			lab3.setBounds(550, 330, 100,20);
-			JComboBox<String> komb = new JComboBox<>();
-			komb.addItem("");
-			for(Grad g : Aplikacija.gradovi.values()){
-				komb.addItem(g.getNaziv());
-			}
-			komb.setBounds(550, 330, 150, 20);
-			
-			JLabel lab4 = new JLabel("Choose locations: ");
-			lab4.setBounds(550, 350, 100, 20);
-			JComboBox<String> komb2 = new JComboBox<>();
-			komb2.addItem("");
-			String grad = (String) komb.getSelectedItem();
-			if(grad.compareTo("")!=0){
-				for(Lokacija lok : Aplikacija.gradovi.get(grad).getLokacije()){
-					komb2.addItem(lok.getNaziv());
-				}
-			}
-			komb2.setBounds(550, 350, 150, 20);
-			
-			
-			add(lab4);
-			add(komb2);
-			add(lab3);
-			add(komb);
-			add(lab2);
-			add(mjesta);
-			add(lab1);
-			add(naziv);*/
 		});
 		
 		add(dodajObilazak);
