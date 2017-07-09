@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -270,7 +272,19 @@ public class TourWindow extends JFrame{
 			dejt.add(tekst);
 			dejt.setVisible(true);
 		});
-		
+		//////==================================================================
+		tabela.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					JTable target = (JTable) e.getSource();
+					int row = target.getSelectedRow();
+					int column = target.getSelectedColumn();
+					JOptionPane.showMessageDialog(null, (String) tabela.getModel().getValueAt(row, column));
+
+				}
+			}
+		});
+		////===========================================================================
 		dugmeRezervisi.addActionListener((ActionEvent event) -> {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 			String termin = box.getSelectedItem().toString();
