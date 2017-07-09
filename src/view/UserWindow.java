@@ -37,6 +37,7 @@ import model.Lokacija;
 import model.Obilazak;
 
 public class UserWindow extends JFrame implements ItemListener{
+	//prazan
 	private JLabel ime;
 	private JLabel prezime;
 	private JLabel email;

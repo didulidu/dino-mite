@@ -265,7 +265,7 @@ public class TourWindow extends JFrame{
 							}
 						}
 					} catch (Exception e) {
-						//push cock
+						//push cockk
 						//and then pull it
 						// ;))))
 						e.printStackTrace();
