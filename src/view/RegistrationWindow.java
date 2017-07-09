@@ -26,7 +26,7 @@ public class RegistrationWindow extends JFrame {
 	private String _name;
 	private String _lName;
 	private String _email;
-	private java.util.Date _birth;
+	private java.util.Date _birth = new java.util.Date();
 
 	private SimpleDateFormat sdf;
 
@@ -43,21 +43,15 @@ public class RegistrationWindow extends JFrame {
 	private Korisnik checkRegistration() {
 		if (_username.isEmpty() || _password.isEmpty() || _name.isEmpty() || _lName.isEmpty() || _street.isEmpty()
 				|| _jmbg.isEmpty() || _email.isEmpty()) {
-			System.out.println("USO OVDE 2");
 			return null;
 		}
 
 		for (Korisnik k : Aplikacija.korisnici.values()) {
-			System.out.println("tu");
 			if (k.getKorisnickoIme().compareTo(_username) == 0) {
-				System.out.println("USO OVDE 3");
 				return null;
 			}
 		}
-		System.out.println("pre");
-		Korisnik kori = new Korisnik(_username, _password,
-				new Osoba(_name, _lName, _jmbg, _street, _birth, (genID +1) + "", 0, _email), true);
-		System.out.println("kooora: " + kori);
+		Korisnik kori = new Korisnik(_username, _password, new Osoba(_name, _lName, _jmbg, _street, _birth, genID+1+"", 0, _email), true);
 		genID+=1;
 		Aplikacija.korisnici.put(_username, kori);
 		return kori;
@@ -162,19 +156,15 @@ public class RegistrationWindow extends JFrame {
 			_street = streetT.getText();
 			_jmbg = jmbgT.getText();
 			_email = emailT.getText();
-			System.out.println(_username + _password + _name + _lName + _street + _jmbg + _email);
 			boolean okk = false;
 			try {
 				_birth = sdf.parse(birthT.getText());
-
-				okk = true;
-				dateErr.setVisible(false);
+				okk= true;
 				System.out.println(_birth);
 
 				System.out.println(_username + _password + _name + _lName + _street + _jmbg + _email);
 
 				Korisnik ko = checkRegistration();
-				System.out.println("korisnik: " + ko);
 				if (ko == null) {
 					System.out.println("invalid username ili nedostaje nesto");
 					errT.setVisible(true);
@@ -183,7 +173,6 @@ public class RegistrationWindow extends JFrame {
 					if (!okk) {
 						dateErr.setVisible(true);
 						birthT.setText("");
-						System.out.println("Greska u datumu");
 					} else {
 						dateErr.setVisible(false);
 						errT.setVisible(false);
@@ -193,6 +182,7 @@ public class RegistrationWindow extends JFrame {
 				}
 			} catch (Exception e) {
 				okk = false;
+				System.out.println("ovde je ipak...");
 				dateErr.setVisible(true);
 			}
 		});
