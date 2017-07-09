@@ -10,6 +10,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 
 import model.Aplikacija;
+import model.FileHandler;
 import model.Grad;
 import model.Izvodjenje;
 import model.Korisnik;
@@ -148,34 +150,51 @@ public class UserWindow extends JFrame implements ItemListener{
 		add(skrol);
 		tabela.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
+				SimpleDateFormat termin = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 			    if (e.getClickCount() == 2) {
 			      JTable target = (JTable)e.getSource();
 			      int row = target.getSelectedRow();
 			      int column = target.getSelectedColumn();
 			      String[] lista = ((String)tabela.getModel().getValueAt(row, column)).split("\\|");
 			      if(((String)kombo.getSelectedItem()).compareTo("Your guidances")==0){
-			    	  System.out.println("he");
-			    	  for(Obilazak o : Aplikacija.sviObilasci.values()){
-			    		  if(o.getNaziv().compareTo(lista[0])==0){
-			    			  JFrame otkaz = new JFrame();
-			    			  otkaz.setLayout(null);
-			    			  otkaz.setSize(350, 120);
-			    			  JLabel lab = new JLabel("Do you want to cancel this guidance?");
-			    			  lab.setBounds(10,10,300,20);
-			    			  JButton yes = new JButton("Yes");
-			    			  JButton no = new JButton("No");
-			    			  yes.setBounds(40,40,100,20);
-			    			  no.setBounds(150,40,100,20);
-			    			  
-			    			  otkaz.add(yes);
-			    			  otkaz.add(no);
-			    			  otkaz.add(lab);
-			    			  otkaz.setVisible(true);
-			    			  break;
-			    		  }
+			    	  if(lista[2].compareTo("kreiran")==0){
+			    		  for(Obilazak o : Aplikacija.trenutni.getVodic()){
+			    			  for(Izvodjenje izv : o.getIzvodjenja().values()){
+					    		  if(o.getNaziv().compareTo(lista[0])==0 && termin.format(izv.getTermin()).compareTo(lista[1])==0){
+					    			  IzvWindow iw = new IzvWindow(izv.getIdIzv());
+					    			  iw.setVisible(true);
+					    			  break;
+					    		  }
+			    			  }
+				    	  }
 			    	  }
 			      }else if(((String)kombo.getSelectedItem()).compareTo("Tours you purchased")==0){
-			    	  
+	    			  JFrame otkaz = new JFrame();
+	    			  otkaz.setLayout(null);
+	    			  otkaz.setSize(350, 120);
+	    			  JLabel lab = new JLabel("Do you want to cancel this purchase?");
+	    			  lab.setBounds(10,10,300,20);
+	    			  JButton yes = new JButton("Yes");
+	    			  JButton no = new JButton("No");
+	    			  yes.setBounds(40,40,100,20);
+	    			  no.setBounds(150,40,100,20);
+	    			  yes.addActionListener((ActionEvent e1)->{
+				    		  for(Izvodjenje izv : Aplikacija.trenutni.getPrijavljen()){
+				    			  if(lista[1].compareTo(termin.format(izv.getTermin()))==0 && izv.getObilazak().getNaziv().compareTo(lista[0])==0){
+				    				  izv.odjavaDolaska(Aplikacija.trenutni.getKorisnickoIme(), izv.getObilazak().getIdOb());
+				    				  otkaz.dispose();
+				    				  popuniTabelu("Tours you purchased");
+				    				  break;
+				    			  }
+				    		  }
+	    			  });
+	    			  no.addActionListener((ActionEvent e2)->{
+	    				  otkaz.dispose();
+	    			  });
+	    			  otkaz.add(yes);
+	    			  otkaz.add(no);
+	    			  otkaz.add(lab);
+	    			  otkaz.setVisible(true);
 			      }else{
 			    	  for(Obilazak o : Aplikacija.sviObilasci.values()){
 			    		  if(o.getNaziv().compareTo(lista[0])==0){
@@ -242,15 +261,13 @@ public class UserWindow extends JFrame implements ItemListener{
 			model.setRowCount(0);
 			int longest = 10;
 			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
-			for(Obilazak o : Aplikacija.trenutni.getTurista()){
-				for(Izvodjenje izv : o.getIzvodjenja().values()){
+			for(Izvodjenje izv : Aplikacija.trenutni.getPrijavljen()){
 					if(izv.getStanje().getUpis().compareTo("kreiran")==0){
 						if (((izv.getObilazak().getNaziv()+"|"+termin.format(izv.getTermin())).length())>longest){
 							longest = (izv.getObilazak().getNaziv()+"|"+termin.format(izv.getTermin())).length();
 						}
 						model.addRow(new Object[] {izv.getObilazak().getNaziv()+"|"+termin.format(izv.getTermin())});
 					}
-				}
 			}
 			tabela.setPreferredSize(new Dimension(longest*10,model.getRowCount()*50));
 		}else{

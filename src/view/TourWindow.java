@@ -55,8 +55,11 @@ public class TourWindow extends JFrame{
 		SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 		
 		box.removeAllItems();
+		box.addItem("");
 		for (Izvodjenje i : Aplikacija.sviObilasci.get(idObilaska).getIzvodjenja().values()){
-			box.addItem(sdf.format(i.getTermin()));
+			if(i.getStanje().getUpis().compareTo("kreiran")==0){
+				box.addItem(sdf.format(i.getTermin()));
+			}
 		}
 	}
 	

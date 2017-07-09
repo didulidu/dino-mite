@@ -154,6 +154,11 @@ public class FileHandler {
 				}
 				String[] prijavljeniTurista = i.split("/");
 				turisti.put(Aplikacija.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
+				if(prijavljeniTurista[1].compareTo("tba")==0){
+					ArrayList<Izvodjenje> tempy = Aplikacija.korisnici.get(prijavljeniTurista[0]).getPrijavljen();
+					tempy.add(izv);
+					Aplikacija.korisnici.get(prijavljeniTurista[0]).setPrijavljen(tempy);;
+				}
 			}
 			izv.setTermin(termin.parse(lista[3]));
 			izv.setTuristi(turisti);

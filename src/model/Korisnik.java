@@ -13,8 +13,10 @@ public class Korisnik {
 	protected ArrayList<Obilazak> vodic;
 	protected ArrayList<Obilazak> turista;
 	protected StanjeKorisnika stanje;
+	protected ArrayList<Izvodjenje> prijavljen;
 	
 	public Korisnik(){
+		this.prijavljen = new ArrayList<Izvodjenje>();
 		this.vodic = new ArrayList<Obilazak>();
 		this.turista = new ArrayList<Obilazak>();
 	}
@@ -23,6 +25,7 @@ public class Korisnik {
 	public Korisnik(String korisnickoIme, String lozinka, Osoba osoba, boolean registrovan, ArrayList<Obilazak> vodic,
 			ArrayList<Obilazak> turista) {
 		super();
+		this.prijavljen = new ArrayList<Izvodjenje>();
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.osoba = osoba;
@@ -33,6 +36,7 @@ public class Korisnik {
 	
 	public Korisnik(String korisnickoIme, String lozinka, Osoba osoba, boolean registrovan) {
 		super();
+		this.prijavljen = new ArrayList<Izvodjenje>();
 		this.korisnickoIme = korisnickoIme;
 		this.lozinka = lozinka;
 		this.osoba = osoba;
@@ -159,8 +163,20 @@ public class Korisnik {
 	public void promijeniStanje(StanjeKorisnika s){
 		this.setStanje(s);
 	}
+	
+	
 ////
 	
+	public ArrayList<Izvodjenje> getPrijavljen() {
+		return prijavljen;
+	}
+
+
+	public void setPrijavljen(ArrayList<Izvodjenje> prijavljen) {
+		this.prijavljen = prijavljen;
+	}
+
+
 	public void izmeniNaObrisano(){
 		for (Obilazak o:vodic){
 			o.getStanjeObilaska().izbrisanObilazak(); //postavljanje svih njegovih obilazaka na obrisane

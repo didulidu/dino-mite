@@ -108,9 +108,12 @@ public class Izvodjenje {
 		this.stanje.prijavaNaTermin();
 	}
 	
-	public void odjavaDolaska(String kime){
+	public void odjavaDolaska(String kime, String idOb){
 		this.brMjesta++;
 		this.turisti.remove(Aplikacija.korisnici.get(kime));
+		ArrayList<Izvodjenje> temp = Aplikacija.korisnici.get(kime).getPrijavljen();
+		temp.remove(this);
+		Aplikacija.korisnici.get(kime).setPrijavljen(temp);
 		this.stanje.odjavaOdTermina();
 	}
 	
