@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -14,16 +15,20 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Aplikacija;
 import model.Izvodjenje;
+import model.Korisnik;
 import model.Obilazak;
 
 public class TourWindow extends JFrame{
@@ -37,6 +42,7 @@ public class TourWindow extends JFrame{
 	private String idObilaska;
 	private JButton dugmeRezervisi;
 	private Obilazak o= null;
+	private String user="";
 	
 	
 	private void fillComboBox() {
@@ -80,11 +86,13 @@ public class TourWindow extends JFrame{
 		add(naslov);
 		getContentPane().setBackground(new Color(0, 153, 76));
 		
+		
 		labelaTermini.setBounds(40, 150, 150, 25);
 		labelaTermini.setFont(new Font("fontic", Font.BOLD, 25));
 		box.setBounds(140, 150, 150, 25);  
 		add(labelaTermini);
 		add(box);
+		
 		
 		//box.addItemListener(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -121,13 +129,58 @@ public class TourWindow extends JFrame{
 
 		fillTable();
 		
+		JLabel imence = new JLabel("Ime: 	" + o.getVodic().getOsoba().getIme());
+		imence.setBounds(530, 315, 150,25);
+		JLabel prezime = new JLabel("Prezime:	" + o.getVodic().getOsoba().getPrezime());
+		prezime.setBounds(530,340,150,25);
+		JLabel email = new JLabel("Email:	" + o.getVodic().getOsoba().getEmail());
+		email.setBounds(530,370,150,25);
+		add(imence);
+		add(prezime);
+		add(email);
+		JTextPane komentar = new JTextPane();
+		komentar.setBounds(530, 400, 200, 100);
+		add(komentar);
+		JButton dodajKomentar = new JButton("Add comment");
+		dodajKomentar.setBounds(610,505,120,25);
+		add(dodajKomentar);
+		
+		if (Aplikacija.trenutni!=null){
+			user=Aplikacija.trenutni.getKorisnickoIme();
+		}
+		boolean bio = false;
+		for (Korisnik kor:o.getTuristiPrisutni()){
+			if (kor.getKorisnickoIme().compareTo(user)==0){
+				bio=true;
+			}
+		}
+		
+		if (!bio){
+			System.out.println("nije bioo");
+			komentar.setVisible(false);
+			dodajKomentar.setVisible(false);
+		}if (user.compareTo(o.getVodic().getKorisnickoIme())==0){
+			komentar.setVisible(true);
+			dodajKomentar.setVisible(true);
+		}
+		dodajKomentar.addActionListener((ActionEvent event) ->{
+			int broj=0;
+			if (!o.getKomentari().containsKey(user)){
+				o.getKomentari().put(user, new ArrayList<String>());
+			}
+			o.getKomentari().get(user).add(komentar.getText());
+			fillTable();
+		});
+		
+		JLabel slika = new JLabel(new ImageIcon("./src/slike/korisnik.png"));
+		slika.setBounds(530, 100, 200, 200);
+		add(slika);
+		
 		dugmeRezervisi = new JButton("Purchase" );
 		dugmeRezervisi.setBounds(320, 150, 90, 25);
 		add(dugmeRezervisi);
-		if (Aplikacija.trenutni!=null){
-			if (o.getVodic().equals(Aplikacija.trenutni)){
-				dugmeRezervisi.setVisible(false);
-			}
+		if (o.getVodic().getKorisnickoIme().compareTo(user)==0){
+			dugmeRezervisi.setVisible(false);
 		}
 		if (Aplikacija.trenutni==null){
 			dugmeRezervisi.setVisible(false);
@@ -172,5 +225,7 @@ public class TourWindow extends JFrame{
 		});
 		
 	}
+	
+	
 
 }

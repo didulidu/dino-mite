@@ -135,6 +135,11 @@ public class FileHandler {
 				String[] prijavljeniTurista = i.split("/");
 				turisti.put(Aplikacija.korisnici.get(prijavljeniTurista[0]), prijavljeniTurista[1]);
 			}
+			for (Korisnik koris:turisti.keySet()){
+				if (turisti.get(koris).compareTo("bio")==0){
+					izv.getObilazak().getTuristiPrisutni().add(koris);
+				}
+			}
 			izv.setTermin(termin.parse(lista[3]));
 			izv.setTuristi(turisti);
 			izv.setBrMjesta(Integer.parseInt(lista[4]));
