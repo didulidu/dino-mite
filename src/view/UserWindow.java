@@ -225,7 +225,7 @@ public class UserWindow extends JFrame implements ItemListener{
 		}else if (str.compareTo("All your tours")==0){
 			model.setRowCount(0);
 			int longest = 0;
-			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.YYYY. HH:mm");
+			SimpleDateFormat termin = new SimpleDateFormat("dd.MM.yyyy. HH:mm");
 			for(Obilazak o : Aplikacija.trenutni.getVodic()){
 				for(Izvodjenje iz : o.getIzvodjenja().values()){
 					if(o.getNaziv().length()+iz.getTermin().toString().length()>longest){
