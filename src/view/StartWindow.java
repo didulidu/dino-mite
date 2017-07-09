@@ -97,7 +97,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		addWindowListener(new WindowEventHandler());
-	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//
 		
 		setLocationRelativeTo(null);
 		setResizable(false);
