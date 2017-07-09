@@ -34,7 +34,7 @@ import model.Obilazak;
 
 public class TourWindow extends JFrame{
 	private JLabel labelaTermini;
-	private JComboBox<String> box;
+	private JComboBox<String> box = new JComboBox<String>();
 	private String[] termini;
 	private Object[][] podaci = new Object[][]{};
 	private JTable tabela;
@@ -49,8 +49,8 @@ public class TourWindow extends JFrame{
 	
 	private void fillComboBox() {
 		SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy. HH:mm");
-		box = new JComboBox<>();
-		box.addItem("");
+		
+		box.removeAllItems();
 		for (Izvodjenje i : Aplikacija.sviObilasci.get(idObilaska).getIzvodjenja().values()){
 			box.addItem(sdf.format(i.getTermin()));
 		}
@@ -172,6 +172,7 @@ public class TourWindow extends JFrame{
 			}
 			o.getKomentari().get(user).add(komentar.getText());
 			fillTable();
+			komentar.setText("");
 		});
 		
 		JLabel slika = new JLabel(new ImageIcon("./src/slike/korisnik.png"));
@@ -196,9 +197,12 @@ public class TourWindow extends JFrame{
 		
 		dugmeZakazi.addActionListener((ActionEvent event)->{
 			JFrame dejt = new JFrame();
+			dejt.setLocationRelativeTo(null);
 			dejt.setLayout(null);
 			dejt.setSize(350, 120);
-			JLabel lab = new JLabel("Input date(dd.mm.yyyy. hh:mm): ");
+			ImageIcon ikona=new ImageIcon("./src/slike/dinamit.png");
+			dejt.setIconImage(ikona.getImage());
+			JLabel lab = new JLabel("Input date(dd.MM.yyyy. HH:mm): ");
 			JTextField tekst = new JTextField();
 			lab.setBounds(30, 10, 200, 20);
 			tekst.setBounds(220, 10, 100, 20);
@@ -213,13 +217,20 @@ public class TourWindow extends JFrame{
 				}catch(Exception e1){
 					uspio = false;
 					tekst.setText("");
-					JOptionPane.showMessageDialog(null, "Invalid input - input in format dd.mm.yyyy. hh:mm!");
+					JOptionPane.showMessageDialog(null, "Invalid input! Input in format dd.MM.yyyy. HH:mm");
+					tekst.setText("");
+				}
+				if (d.before(new Date())){
+					uspio=false;
+					JOptionPane.showMessageDialog(null, "Invalid input! Cannot pick a date in past!"); //DUBOKOUMNO
+					tekst.setText("");
 				}
 				if(uspio){
+					
 					Aplikacija.trenutni.dodavanjeTermina(o, d);
 					dejt.dispatchEvent(new WindowEvent(dejt, WindowEvent.WINDOW_CLOSING));
 				}
-				//ubaciti refresh combobox
+				fillComboBox();
 			});
 			dejt.add(dugme);
 			

@@ -37,6 +37,7 @@ public class StartWindow extends JFrame implements ItemListener {
 	private String password;
 	private RegistrationWindow regWin;
 	private UserWindow uw;
+	private JButton obrisiNalog = new JButton("Delete acc");
 
 	// Proverava ispravnost unetih podataka pri logovanju
 	private Korisnik checkLogIn() {
@@ -153,6 +154,8 @@ public class StartWindow extends JFrame implements ItemListener {
 		JButton logOut = new JButton("<html><font color='blue'>Log out</font></html>");
 		logOut.setVisible(false);
 		logOut.setBounds(850, 480, 100, 30);
+		obrisiNalog.setVisible(false);
+		obrisiNalog.setBounds(850, 520, 100, 30);
 		
 		JButton seeAcc = new JButton("<html><font color='green'>Account</font></html>");
 		seeAcc.setBounds(730, 480, 100, 30);
@@ -186,6 +189,7 @@ public class StartWindow extends JFrame implements ItemListener {
 		add(userT);
 		add(passT);
 		add(errT);
+		add(obrisiNalog);
 		// na klik cancel dugmeta :
 		cancel.addActionListener((ActionEvent event) -> {
 			dispose();
@@ -202,6 +206,7 @@ public class StartWindow extends JFrame implements ItemListener {
 				userT.setText("");
 				passT.setText("");
 			} else {
+				obrisiNalog.setVisible(true);
 				seeAcc.setVisible(true);
 				errT.setVisible(false);
 				userT.setVisible(false);
@@ -218,6 +223,30 @@ public class StartWindow extends JFrame implements ItemListener {
 				// dispose();
 			}
 		});
+		
+		
+		//obrisiNalog = new JButton("Delete profile");
+		//obrisiNalog.setBounds(550, 220, 200, 30);
+		obrisiNalog.addActionListener((ActionEvent)->{
+			//dodati ovo dugme u StartWindow?
+			JFrame sure = new JFrame();
+			sure.setLayout(null);
+			sure.setSize(350, 120);
+			JLabel lab = new JLabel("Are you sure you want to delete your profile?");
+			lab.setBounds(10,10,300,20);
+			JButton yes = new JButton("Yes");
+			JButton canc = new JButton("Cancel");
+			yes.setBounds(40,40,100,20);
+			canc.setBounds(150,40,100,20);
+			yes.addActionListener((ActionEvent e)->{
+			});
+			
+			sure.add(yes);
+			sure.add(canc);
+			sure.add(lab);
+			sure.setVisible(true);
+		});
+		
 
 		// registracija
 

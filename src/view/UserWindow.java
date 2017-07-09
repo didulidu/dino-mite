@@ -65,10 +65,11 @@ public class UserWindow extends JFrame implements ItemListener{
 		SimpleDateFormat datRodj = new SimpleDateFormat("dd.MM.yyyy.");
 		datumRodj = new JLabel("Datum rodjenja:	 " + datRodj.format(k.getOsoba().getDatumRodjenja()));
 		stanje = new JLabel("Stanje racuna: 	" + k.getOsoba().getStanjeNaRacunu());
-		ImageIcon ii= new ImageIcon("./src/slike/naslov.png");
-		ii.getImage().getScaledInstance(100, 100, Image.SCALE_REPLICATE);
+		ImageIcon ii= new ImageIcon("./src/slike/dinamit.png");
 		this.setIconImage(ii.getImage());
-		slika = new JLabel(ii);
+		ImageIcon avatar = new ImageIcon("./src/slike/korisnik.png");
+		slika = new JLabel(avatar);
+		
 	}
 	
 	public UserWindow(Korisnik k){
@@ -104,27 +105,6 @@ public class UserWindow extends JFrame implements ItemListener{
 		dodajObilazak = new JButton("Add tour");
 		dodajObilazak.setBounds(50, 430, 90, 25);
 		
-		izbrisiProfil = new JButton("Delete profile");
-		izbrisiProfil.setBounds(550, 220, 200, 30);
-		izbrisiProfil.addActionListener((ActionEvent)->{
-			//dodati ovo dugme u StartWindow?
-			JFrame sure = new JFrame();
-			sure.setLayout(null);
-			sure.setSize(350, 120);
-			JLabel lab = new JLabel("Are you sure you want to delete your profile?");
-			lab.setBounds(10,10,300,20);
-			JButton yes = new JButton("Yes");
-			JButton cancel = new JButton("Cancel");
-			yes.setBounds(40,40,100,20);
-			cancel.setBounds(150,40,100,20);
-			yes.addActionListener((ActionEvent e)->{
-			});
-			
-			sure.add(yes);
-			sure.add(cancel);
-			sure.add(lab);
-			sure.setVisible(true);
-		});
 	
 		
 		dodajObilazak.addActionListener((ActionEvent event)->{			
@@ -133,7 +113,6 @@ public class UserWindow extends JFrame implements ItemListener{
 		});
 		
 		add(dodajObilazak);
-		add(izbrisiProfil);
 		add(ime);
 		add(prezime);
 		add(email);
