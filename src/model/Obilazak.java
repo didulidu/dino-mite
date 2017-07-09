@@ -134,6 +134,9 @@ public class Obilazak {
 			}
 			linija = linija + ";" + k.getKorisnickoIme();
 		}
+		if(this.getTuristiPrisutni().isEmpty()){
+			linija = linija + "|";
+		}
 		return linija+"|"+this.cena+"|"+stanjeObilaska.toString()+"\n";
 	}
 	

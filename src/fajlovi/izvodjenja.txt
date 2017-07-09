@@ -1,4 +1,4 @@
-1.1|kreiran|vladsey/bio|03.01.2012. 15:15|9
-1.2|kreiran|vladsey/bio;maery/bio|02.01.2012. 15:15|8
+1.1|otkazan|vladsey/tba|03.01.2012. 15:15|0
+1.2|zavrsen|vladsey/bio;maery/bio|02.01.2012. 15:15|8
 2.1|zavrsen|maery/bio|05.01.2012. 15:15|9
-2.2|utoku|vladsey/bio;maery/bio|07.01.2012. 15:15|8
+2.2|utoku|vladsey/tba;maery/tba|07.01.2012. 15:15|8

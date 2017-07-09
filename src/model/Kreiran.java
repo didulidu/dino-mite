@@ -34,8 +34,9 @@ public class Kreiran extends Stanje{
 
 	@Override
 	public void poceloIzvodjenje() {
-		// TODO Auto-generated method stub
-		
+		UToku s = new UToku();
+		s.setIzvodjenje(this.getIzvodjenje());
+		this.getIzvodjenje().promijeniStanje(s);
 	}
 
 	@Override

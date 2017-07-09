@@ -125,7 +125,9 @@ public class Izvodjenje {
 		ArrayList<Korisnik> temp = this.obilazak.getTuristiPrisutni();
 		for(Korisnik k: this.turisti.keySet()){
 			if(this.turisti.get(k).compareTo("bio")==0){
-				temp.add(k);
+				if(!temp.contains(k)){
+					temp.add(k);
+				}
 			}
 			ArrayList<Obilazak> obs = k.getTurista();
 			obs.add(this.obilazak);

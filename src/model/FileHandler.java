@@ -95,6 +95,9 @@ public class FileHandler {
 			help = lista[6].split(";");
 			ArrayList<Korisnik> turisti = ob.getTuristiPrisutni();
 			for(String i : help){
+				if(i.isEmpty()){
+					continue;
+				}
 				ArrayList<Obilazak> turisticki = Aplikacija.korisnici.get(i).getTurista();
 				turisticki.add(ob);
 				Aplikacija.korisnici.get(i).setTurista(turisticki);
