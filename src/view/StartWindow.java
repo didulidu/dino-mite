@@ -250,7 +250,7 @@ public class StartWindow extends JFrame implements ItemListener {
 				//promena stanja korisnika
 				Aplikacija.trenutni.getStanje().izbrisanKorisnik();
 				Aplikacija.trenutni.setRegistrovan(false);
-				
+				//
 				Aplikacija.trenutni = null;
 				uw.dispose();
 				userT.setVisible(true);

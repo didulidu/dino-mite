@@ -51,7 +51,7 @@ public class ReservationWindow extends JFrame{
 		
 		
 		YesBook.addActionListener((ActionEvent event) -> {
-			i.setBrMjesta(i.getBrMjesta()-1);//
+			i.setBrMjesta(i.getBrMjesta()-1);////
 			i.getStanje().prijavaNaTermin();
 			i.getTuristi().put(Aplikacija.trenutni, "tba");
 			Aplikacija.trenutni.getOsoba().setStanjeNaRacunu(Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()-i.getObilazak().getCena());

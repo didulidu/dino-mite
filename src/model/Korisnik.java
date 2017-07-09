@@ -156,6 +156,7 @@ public class Korisnik {
 	public void promijeniStanje(StanjeKorisnika s){
 		this.setStanje(s);
 	}
+////
 	
 	public void izmeniNaObrisano(){
 		for (Obilazak o:vodic){
@@ -163,3 +164,4 @@ public class Korisnik {
 		}
 	}
 }
+
