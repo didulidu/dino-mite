@@ -141,6 +141,9 @@ public class Korisnik {
 		ob.setNaziv(naziv);
 		ob.setVodic(this);
 		ob.setCena(cijena);
+		ArrayList<Obilazak> temp = this.getVodic();
+		temp.add(ob);
+		this.setVodic(temp);
 		Aplikacija.sviObilasci.put(ob.getIdOb(), ob);
 	}
 	
