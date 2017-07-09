@@ -43,7 +43,7 @@ public class StartWindow extends JFrame implements ItemListener {
 	// Proverava ispravnost unetih podataka pri logovanju
 	private Korisnik checkLogIn() {
 		for (Korisnik k : Aplikacija.korisnici.values()) {
-			if (k.getKorisnickoIme().compareTo(username) == 0 && k.getLozinka().compareTo(password) == 0)
+			if (k.getKorisnickoIme().compareTo(username) == 0 && k.getLozinka().compareTo(password) == 0 && k.isRegistrovan())
 				return k;
 		}
 		return null;
@@ -232,6 +232,7 @@ public class StartWindow extends JFrame implements ItemListener {
 			//dodati ovo dugme u StartWindow?
 			JFrame sure = new JFrame();
 			sure.setLayout(null);
+			sure.setLocationRelativeTo(null);
 			sure.setSize(350, 120);
 			JLabel lab = new JLabel("Are you sure you want to delete your profile?");
 			lab.setBounds(10,10,300,20);
@@ -239,11 +240,17 @@ public class StartWindow extends JFrame implements ItemListener {
 			JButton canc = new JButton("Cancel");
 			yes.setBounds(40,40,100,20);
 			canc.setBounds(150,40,100,20);
+			
+			sure.add(yes);
+			sure.add(canc);
+			sure.add(lab);
+			sure.setVisible(true);
+			
 			yes.addActionListener((ActionEvent e)->{
 				//promena stanja korisnika
-				Izbrisan stanjeIzbrisan = new Izbrisan();
-				stanjeIzbrisan.setKorisnik(Aplikacija.trenutni);
-				Aplikacija.trenutni.promijeniStanje(stanjeIzbrisan);
+				Aplikacija.trenutni.getStanje().izbrisanKorisnik();
+				Aplikacija.trenutni.setRegistrovan(false);
+				
 				Aplikacija.trenutni = null;
 				uw.dispose();
 				userT.setVisible(true);
@@ -258,19 +265,14 @@ public class StartWindow extends JFrame implements ItemListener {
 				seeAcc.setVisible(false);
 				passT.setText("");
 				userT.setText("");
-				
+				System.out.println("pumparica");
+				sure.dispose();
 				
 			});
+			
 			canc.addActionListener((ActionEvent e)->{
 				sure.dispose();
 			});
-			
-			sure.add(yes);
-			sure.add(canc);
-			sure.add(lab);
-			sure.setVisible(true);
-			
-			
 		});
 		
 

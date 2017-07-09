@@ -39,6 +39,7 @@ public class Korisnik {
 		this.registrovan = registrovan;
 		this.vodic = new ArrayList<Obilazak>();
 		this.turista = new ArrayList<Obilazak>();
+		this.stanje = new Registrovan();
 	}
 
 
@@ -154,5 +155,11 @@ public class Korisnik {
 	
 	public void promijeniStanje(StanjeKorisnika s){
 		this.setStanje(s);
+	}
+	
+	public void izmeniNaObrisano(){
+		for (Obilazak o:vodic){
+			//o.
+		}
 	}
 }

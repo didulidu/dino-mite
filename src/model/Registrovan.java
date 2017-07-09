@@ -8,7 +8,9 @@ public class Registrovan extends StanjeKorisnika{
 
 	@Override
 	public void izbrisanKorisnik() {
-		
+		Izbrisan stanjeIzbrisan = new Izbrisan();
+		stanjeIzbrisan.setKorisnik(Aplikacija.trenutni);
+		Aplikacija.trenutni.promijeniStanje(stanjeIzbrisan);//
 	}
 
 	@Override
