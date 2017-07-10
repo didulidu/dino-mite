@@ -7,7 +7,7 @@ import java.text.ParseException;
 
 import org.junit.Test;
 
-import model.Aplikacija;
+import model.Aplikacija; 
 
 public class StartTest {
 
