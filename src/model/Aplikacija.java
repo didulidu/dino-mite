@@ -21,7 +21,7 @@ public class Aplikacija {
 	public static HashMap<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
 	public static HashMap<String, Obilazak> sviObilasci = new HashMap<String, Obilazak>();
 	public static HashMap<String, Grad> gradovi = new HashMap<String, Grad>();
-	
+	public StartWindow ex;
 	
 	private static Aplikacija instance = null;
 	
@@ -32,13 +32,13 @@ public class Aplikacija {
 		return instance;
 	}
 	
-	void pokreni() throws NumberFormatException, ParseException, IOException{
+	public void pokreni() throws NumberFormatException, ParseException, IOException{
 		try {
 			FileHandler.ucitavanje();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	StartWindow ex = new StartWindow();
+    	ex = new StartWindow();
         ex.setVisible(true);
         //TourWindow tw = new TourWindow("1");
         //tw.setVisible(true);

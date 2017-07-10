@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -40,6 +41,7 @@ public class StartWindow extends JFrame implements ItemListener {
 	private RegistrationWindow regWin;
 	private UserWindow uw;
 	private JButton obrisiNalog = new JButton("Delete acc");
+	public TourWindow t;
 
 	// Proverava ispravnost unetih podataka pri logovanju
 	private Korisnik checkLogIn() {
@@ -61,8 +63,19 @@ public class StartWindow extends JFrame implements ItemListener {
 	private void fillComboBox() {
 		box = new JComboBox<>();
 		box.addItem("");
-		for (String g : Aplikacija.gradovi.keySet())
-			box.addItem(g);
+		ArrayList<String> gradovi = popuni();
+		for (String grad : gradovi) {
+			box.addItem(grad);
+		}
+	}
+
+	public ArrayList<String> popuni() {
+		ArrayList<String> gradovi = new ArrayList<String>();
+		for (String g : Aplikacija.gradovi.keySet()) {
+			gradovi.add(g);
+		}
+		return gradovi;
+
 	}
 
 	// Popunjavanje Tabele Obilascima selektovanog grada
@@ -130,7 +143,7 @@ public class StartWindow extends JFrame implements ItemListener {
 					System.out.println(x);
 					for (Obilazak k : Aplikacija.sviObilasci.values()) {
 						if (x.compareTo(k.getNaziv()) == 0) {
-							TourWindow t = new TourWindow(k.getIdOb());
+							t = new TourWindow(k.getIdOb());
 							t.setVisible(true);
 						}
 					}

@@ -66,7 +66,7 @@ public class TourWindow extends JFrame{
 		}
 	}
 	
-	private void fillTable() {
+	public boolean fillTable() {
 		model.setRowCount(0);
 		Obilazak o = Aplikacija.sviObilasci.get(idObilaska);
 		for (String user:o.getKomentari().keySet()){
@@ -74,7 +74,7 @@ public class TourWindow extends JFrame{
 				model.addRow(new Object[]{ user+": "+kom});
 			}
 		}
-		
+		return true;
 	}
 	private void fillLocations(){
 		modelIzvodjenja.setRowCount(0);
