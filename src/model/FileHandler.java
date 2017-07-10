@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class FileHandler {
 	protected static String sep = System.getProperty("file.separator");
 	
-	public static void ucitavanje() throws IOException, NumberFormatException, ParseException{
+	public static boolean ucitavanje() throws IOException, NumberFormatException, ParseException{
 		String linija;
 		String[] lista;
 		
@@ -183,10 +183,10 @@ public class FileHandler {
 			Aplikacija.sviObilasci.get(lista[0]).getKomentari().get(lista[1]).add(lista[2]);
 		}
 		cit.close();
-		
+		return true;
 	}
 	
-	public static void upisUFajl() throws IOException{
+	public static boolean upisUFajl() throws IOException{
 		File fajl = new File("."+sep+"src"+sep+"fajlovi"+sep+"korisnici.txt");
 		PrintWriter pis = new PrintWriter(new FileWriter(fajl.getAbsolutePath()));
 		String linija;
@@ -223,6 +223,7 @@ public class FileHandler {
 			}
 		}
 		pis.close();
+		return true;
 		//d
 	}
 }
