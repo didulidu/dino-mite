@@ -5,8 +5,8 @@ public abstract class Stanje {
 	protected String upis;
 	
 	public abstract void otkazanTermin();
-	public abstract void prijavaNaTermin();
-	public abstract void odjavaOdTermina();
+	public abstract void prijavaNaTermin(String kime);
+	public abstract void odjavaOdTermina(String kime);
 	public abstract void poceloIzvodjenje();
 	public abstract void zavrsenoIzvodjenje();
 	

@@ -13,13 +13,15 @@ public class Kreiran extends Stanje{
 
 	@Override
 	public void otkazanTermin() {
+		this.getIzvodjenje().povracajNovca("");
 		Otkazan s = new Otkazan();
 		s.setIzvodjenje(this.izvodjenje);
 		this.izvodjenje.promijeniStanje(s);
 	}
 
 	@Override
-	public void prijavaNaTermin() {
+	public void prijavaNaTermin(String kime) {
+		this.getIzvodjenje().placanje(kime);
 		if(this.izvodjenje.brMjesta==0){
 			Popunjen s = new Popunjen();
 			s.setIzvodjenje(this.izvodjenje);
@@ -28,8 +30,8 @@ public class Kreiran extends Stanje{
 	}
 
 	@Override
-	public void odjavaOdTermina() {
-		//ne radi nista, ostaje u ovom stanju
+	public void odjavaOdTermina(String kime) {
+		this.getIzvodjenje().povracajNovca(kime);
 	}
 
 	@Override

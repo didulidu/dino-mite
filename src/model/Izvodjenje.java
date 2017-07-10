@@ -105,7 +105,7 @@ public class Izvodjenje {
 	public void prijavaDolaska(String kime){
 		this.brMjesta--;
 		this.turisti.put(Aplikacija.korisnici.get(kime), "tba");
-		this.stanje.prijavaNaTermin();
+		this.stanje.prijavaNaTermin(kime);
 	}
 	
 	public void odjavaDolaska(String kime, String idOb){
@@ -114,7 +114,7 @@ public class Izvodjenje {
 		ArrayList<Izvodjenje> temp = Aplikacija.korisnici.get(kime).getPrijavljen();
 		temp.remove(this);
 		Aplikacija.korisnici.get(kime).setPrijavljen(temp);
-		this.stanje.odjavaOdTermina();
+		this.stanje.odjavaOdTermina(kime);
 	}
 	
 	public void promijeniStanje(Stanje s){
@@ -136,5 +136,25 @@ public class Izvodjenje {
 		this.obilazak.setTuristiPrisutni(temp);
 		this.stanje.zavrsenoIzvodjenje();
 	}
-	//d
+	
+	public void placanje(String korisnickoIme){
+		Korisnik k = Aplikacija.korisnici.get(korisnickoIme);
+		double stanjeRac = k.getOsoba().getStanjeNaRacunu();
+		k.getOsoba().setStanjeNaRacunu(stanjeRac-this.getObilazak().getCena());		
+	}
+	
+	public void povracajNovca(String korisnickoIme){
+		double stanjeRac;
+		if(korisnickoIme.isEmpty()){
+			for(Korisnik k : this.getTuristi().keySet()){
+				stanjeRac = k.getOsoba().getStanjeNaRacunu();
+				k.getOsoba().setStanjeNaRacunu(stanjeRac+this.getObilazak().getCena());
+			}
+		}else{
+			Korisnik k = Aplikacija.korisnici.get(korisnickoIme);
+			stanjeRac = k.getOsoba().getStanjeNaRacunu();
+			k.getOsoba().setStanjeNaRacunu(stanjeRac+this.getObilazak().getCena());
+		}
+	}
+	
 }

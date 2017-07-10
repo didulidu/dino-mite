@@ -298,22 +298,17 @@ public class TourWindow extends JFrame{
 								JOptionPane.showMessageDialog(null, "Not enough money on your card!");
 							}
 							else if (i.getTuristi().containsKey(Aplikacija.trenutni)){
-								System.out.println("usao");
 								JOptionPane.showMessageDialog(null, "You've already booked this tour!");
 								
 							}else if (i.getBrMjesta()==o.getBrMjesta()){
 								JOptionPane.showMessageDialog(null, "No more free space for chosen tour on this date!");
 							}
 							else{
-								System.out.println("nasao");
 								ReservationWindow rezProzor = new ReservationWindow(i);//prosledjuje se izvodjenje
 								
 							}
 						}
 					} catch (Exception e) {
-						//push cockk
-						//and then pull it
-						// ;))))
 						e.printStackTrace();
 					}
 				}

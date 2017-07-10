@@ -18,13 +18,13 @@ public class Zavrsen extends Stanje {
 	}
 
 	@Override
-	public void prijavaNaTermin() {
+	public void prijavaNaTermin(String kime) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void odjavaOdTermina() {
+	public void odjavaOdTermina(String kime) {
 		// TODO Auto-generated method stub
 		
 	}

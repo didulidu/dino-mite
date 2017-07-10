@@ -51,10 +51,13 @@ public class ReservationWindow extends JFrame{
 		
 		
 		YesBook.addActionListener((ActionEvent event) -> {
-			i.setBrMjesta(i.getBrMjesta()-1);////
-			i.getStanje().prijavaNaTermin();
-			i.getTuristi().put(Aplikacija.trenutni, "tba");
-			Aplikacija.trenutni.getOsoba().setStanjeNaRacunu(Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()-i.getObilazak().getCena());
+			i.prijavaDolaska(Aplikacija.trenutni.getKorisnickoIme());
+			//i.setBrMjesta(i.getBrMjesta()-1);////
+			//i.getStanje().prijavaNaTermin(Aplikacija.trenutni.getKorisnickoIme());
+			//i.getTuristi().put(Aplikacija.trenutni, "tba");
+			
+			//i.placanje(Aplikacija.trenutni.getKorisnickoIme());
+			//Aplikacija.trenutni.getOsoba().setStanjeNaRacunu(Aplikacija.trenutni.getOsoba().getStanjeNaRacunu()-i.getObilazak().getCena());
 			JOptionPane.showMessageDialog(null, "You've successfuly joined this tour!");
 			this.dispose();
 			

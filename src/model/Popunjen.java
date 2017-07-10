@@ -13,19 +13,20 @@ public class Popunjen extends Stanje{
 
 	@Override
 	public void otkazanTermin() {
+		this.getIzvodjenje().povracajNovca("");
 		Otkazan s = new Otkazan();
 		s.setIzvodjenje(this.getIzvodjenje());
 		this.izvodjenje.promijeniStanje(s);
 	}
 
 	@Override
-	public void prijavaNaTermin() {
+	public void prijavaNaTermin(String kime) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void odjavaOdTermina() {
+	public void odjavaOdTermina(String kime) {
 		Kreiran s = new Kreiran();
 		s.setIzvodjenje(this.getIzvodjenje());
 		this.getIzvodjenje().promijeniStanje(s);
