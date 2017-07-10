@@ -111,6 +111,7 @@ public class FileHandler {
 			
 			if (lista[8].compareTo("aktuelan")==0){
 				AktuelanObilazak a = new AktuelanObilazak();
+				a.setObilazak(ob);
 				ob.setStanjeObilaska(a);
 			}else{
 				NeaktuelanObilazak a = new NeaktuelanObilazak();

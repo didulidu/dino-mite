@@ -11,7 +11,6 @@ public class AktuelanObilazak extends StanjeObilaska {
 		NeaktuelanObilazak s = new NeaktuelanObilazak();
 		s.setObilazak(obilazak);
 		obilazak.promeniStanje(s);
-
 	}
 
 	@Override

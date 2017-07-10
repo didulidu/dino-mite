@@ -68,7 +68,7 @@ public class Obilazak {
 		lokacije = new ArrayList<Lokacija>();
 		izvodjenja = new HashMap<String,Izvodjenje>();
 		turistiPrisutni = new ArrayList<Korisnik>();
-		stanjeObilaska=new AktuelanObilazak();
+		//stanjeObilaska=new AktuelanObilazak();
 	}
 
 	public Obilazak(String idOb, ArrayList<Lokacija> lokacije, HashMap<String,Izvodjenje> izvodjenja, Korisnik vodic) {
@@ -77,7 +77,7 @@ public class Obilazak {
 		this.lokacije = lokacije;
 		this.izvodjenja = izvodjenja;
 		this.vodic = vodic;
-		stanjeObilaska=new AktuelanObilazak();
+		//stanjeObilaska=new AktuelanObilazak();
 	}
 	
 

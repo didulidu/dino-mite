@@ -46,6 +46,7 @@ public class TourWindow extends JFrame{
 	private String idObilaska;
 	private JButton dugmeRezervisi;
 	private JButton dugmeZakazi;
+	private JButton izbrisiObilazak;
 	private Obilazak o= null;
 	private String user="";
 	///
@@ -213,6 +214,33 @@ public class TourWindow extends JFrame{
 		slika.setBounds(530, 100, 200, 200);
 		add(slika);
 		
+		izbrisiObilazak = new JButton("Delete this tour");
+		if(Aplikacija.trenutni.getVodic().contains(Aplikacija.sviObilasci.get(this.idObilaska))){
+			izbrisiObilazak.setVisible(true);
+		}else{
+			izbrisiObilazak.setVisible(false);
+		}
+		izbrisiObilazak.setBounds(500, 150, 100, 25);
+		add(izbrisiObilazak);
+		izbrisiObilazak.addActionListener((ActionEvent e)->{
+			boolean postoji = false;
+			for(Izvodjenje izv : Aplikacija.sviObilasci.get(this.idObilaska).getIzvodjenja().values()){
+				String stanje = izv.getStanje().getUpis();
+				if(stanje.compareTo("kreiran")==0 || stanje.compareTo("utoku")==0 || stanje.compareTo("popunjen")==0){
+					postoji = true;
+					break;
+				}
+			}
+			if(postoji){
+				JOptionPane.showMessageDialog(null, "You can't delete tour that has active dates!");
+			}else{
+				JOptionPane.showMessageDialog(null, "Tour deleted!");
+				izbrisiObilazak.setVisible(false);
+				Aplikacija.sviObilasci.get(this.idObilaska).getStanjeObilaska().izbrisanObilazak();
+				this.dispose();
+			}
+		});
+		
 		dugmeRezervisi = new JButton("Purchase" );
 		dugmeRezervisi.setBounds(320, 150, 90, 25);
 		add(dugmeRezervisi);
@@ -227,6 +255,11 @@ public class TourWindow extends JFrame{
 		if (Aplikacija.trenutni==null){
 			dugmeRezervisi.setVisible(false);
 			dugmeZakazi.setVisible(false);
+		}
+		if(Aplikacija.sviObilasci.get(this.idObilaska).getStanjeObilaska().getUpis().compareTo("neaktuelan")==0){
+			dugmeZakazi.setVisible(false);
+			dugmeRezervisi.setVisible(false);
+			izbrisiObilazak.setVisible(false);
 		}
 		
 		dugmeZakazi.addActionListener((ActionEvent event)->{

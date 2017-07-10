@@ -9,7 +9,6 @@ public class NeaktuelanObilazak extends StanjeObilaska {
 	@Override
 	public void izbrisanObilazak() {
 		
-
 	}
 
 	@Override

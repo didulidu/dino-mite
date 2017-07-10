@@ -27,6 +27,7 @@ public class Popunjen extends Stanje{
 
 	@Override
 	public void odjavaOdTermina(String kime) {
+		this.getIzvodjenje().povracajNovca(kime);
 		Kreiran s = new Kreiran();
 		s.setIzvodjenje(this.getIzvodjenje());
 		this.getIzvodjenje().promijeniStanje(s);
