@@ -103,9 +103,13 @@ public class Izvodjenje {
 	}
 	
 	public void prijavaDolaska(String kime){
+		Korisnik k = Aplikacija.korisnici.get(kime);
 		this.brMjesta--;
-		this.turisti.put(Aplikacija.korisnici.get(kime), "tba");
+		this.turisti.put(k, "tba");
 		this.stanje.prijavaNaTermin(kime);
+		ArrayList<Izvodjenje> izvs = k.getPrijavljen();
+		izvs.add(this);
+		k.setPrijavljen(izvs);
 	}
 	
 	public void odjavaDolaska(String kime, String idOb){
