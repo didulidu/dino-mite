@@ -43,11 +43,18 @@ public class StartWindow extends JFrame implements ItemListener {
 
 	// Proverava ispravnost unetih podataka pri logovanju
 	private Korisnik checkLogIn() {
-		for (Korisnik k : Aplikacija.korisnici.values()) {
-			if (k.getKorisnickoIme().compareTo(username) == 0 && k.getLozinka().compareTo(password) == 0 && k.isRegistrovan())
-				return k;
+		if(checkUsernameAndPassword(username, password)){
+			return Aplikacija.korisnici.get(username);
 		}
 		return null;
+	}
+	
+	public boolean checkUsernameAndPassword(String u, String p){
+		for (Korisnik k : Aplikacija.korisnici.values()) {
+			if (k.getKorisnickoIme().compareTo(u) == 0 && k.getLozinka().compareTo(p) == 0 && k.isRegistrovan())
+				return true;
+		}
+		return false;
 	}
 
 	// Popunjavanje Combo Boxa Gradovima koji postoje
