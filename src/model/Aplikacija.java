@@ -32,7 +32,7 @@ public class Aplikacija {
 		return instance;
 	}
 	
-	public void pokreni() throws NumberFormatException, ParseException, IOException{
+	public boolean pokreni() throws NumberFormatException, ParseException, IOException{
 		try {
 			FileHandler.ucitavanje();
 		} catch (IOException e) {
@@ -49,6 +49,7 @@ public class Aplikacija {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
+        return true;
 	}
 	
 }
