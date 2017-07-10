@@ -10,7 +10,7 @@ import org.junit.Test;
 import model.FileHandler;
 
 public class ReadDataTest {
-//
+
 	@Test
 	public void readDataTest() throws NumberFormatException, IOException, ParseException {
 		boolean d = FileHandler.ucitavanje();

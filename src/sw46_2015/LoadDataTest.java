@@ -12,7 +12,7 @@ import model.Aplikacija;
 import model.FileHandler;
 
 public class LoadDataTest {
-	
+	//
 	@Before
 	public void prepare() throws NumberFormatException, IOException, ParseException{
 		FileHandler.ucitavanje();
