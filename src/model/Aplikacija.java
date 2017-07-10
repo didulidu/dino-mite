@@ -45,7 +45,7 @@ public class Aplikacija {
         
         //na kraju
         /*try {
-			FileHandler.upisUFajl();
+			FileHandler.upisUFajl(); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}*/
