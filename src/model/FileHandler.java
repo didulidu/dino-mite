@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class FileHandler {
 	protected static String sep = System.getProperty("file.separator");
-	
+	//
 	public static boolean ucitavanje() throws IOException, NumberFormatException, ParseException{
 		String linija;
 		String[] lista;
