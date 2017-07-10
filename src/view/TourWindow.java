@@ -93,7 +93,7 @@ public class TourWindow extends JFrame{
 		setLayout(null);
 		labelaTermini = new JLabel("Dates:");
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setSize(dim.width*3/5, dim.height*4/5);
+		this.setSize(dim.width*3/5, 900);
 		ImageIcon ikonica = new ImageIcon("./src/slike/dinamit.png");
 		this.setIconImage(ikonica.getImage());
 		this.setTitle("Tour info");
@@ -215,7 +215,7 @@ public class TourWindow extends JFrame{
 		add(slika);
 		
 		izbrisiObilazak = new JButton("Delete this tour");
-		if(Aplikacija.trenutni.getVodic().contains(Aplikacija.sviObilasci.get(this.idObilaska))){
+		if(Aplikacija.trenutni!=null && Aplikacija.trenutni.getVodic().contains(Aplikacija.sviObilasci.get(this.idObilaska))){
 			izbrisiObilazak.setVisible(true);
 		}else{
 			izbrisiObilazak.setVisible(false);
